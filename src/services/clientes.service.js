@@ -33,3 +33,5 @@ export default class ClientesService extends BaseHttpService {
     return this.post(`clientes`, { nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 }
+
+export const clientesService = new ClientesService();

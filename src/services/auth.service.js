@@ -17,3 +17,5 @@ export default class AuthService extends BaseHttpService {
     this.removeToken();
   }
 }
+
+export const authService = new AuthService();
