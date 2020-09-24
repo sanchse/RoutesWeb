@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import TransportistaFormSchema from "../forms/clienteFormSchema";
+import TransportistaFormSchema from "../forms/transportistaFormSchema";
 import babelPolyfill from "babel-polyfill";
 import { transportistasService } from "../services/transportistas.service";
 

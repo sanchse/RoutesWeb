@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <div class="d-flex justify-content-start mb-3">
-      <router-link to="/remolques" class="btn btn-sm btn-outline-secondary">Volver</router-link>
+      <router-link to="/mercancias" class="btn btn-sm btn-outline-secondary">Volver</router-link>
     </div>
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex flex-column align-items-start">
-        <h2>{{editMode ? 'Modificar ': 'Crear '}} Remolque</h2>
+        <h2>{{editMode ? 'Modificar ': 'Crear '}} Mercancia</h2>
         <span class="text-muted">{{editMode ? 'Actualizar ': 'Añadir nuevo '}} registro</span>
       </div>
     </div>
 
     <div class="card pl-4 pt-5 pb-5 pr-4 mt-5">
-      <form action @submit.prevent="submitRemolqueData">
+      <form action @submit.prevent="submitMercanciaData">
         <vue-form-generator tag="div" :schema="schema" :options="formOptions" :model="model" />
         <div class="d-flex justify-content-end mt-3 pr-4">
           <button type="submit" class="btn btn-primary btn-lg">
@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import remolqueFormSchema from "../forms/remolqueFormSchema";
+import mercanciaFormSchema from "../forms/mercanciaFormSchema";
 import babelPolyfill from "babel-polyfill";
-import { remolquesService } from "../services/remolques.service";
+import { mercanciasService } from "../services/mercancias.service";
 
 export default {
-  name: "remolque-post",
+  name: "mercancia-post",
   mounted() {
     if (this.$route.params.id !== undefined) {
-      this.remolqueId = this.$route.params.id;
+      this.mercanciaId = this.$route.params.id;
       this.loadModel();
     }
   },
@@ -40,60 +40,58 @@ export default {
     return {
       model: {
       },
-      schema: remolqueFormSchema,
+      schema: mercanciaFormSchema,
       formOptions: {
         validateAfterChanged: true,
       },
       isSaving: false,
       error: false,
-      remolqueId: null,
+      mercanciaId: null,
     };
   },
   computed: {
     editMode: function () {
-      return this.remolqueId !== null;
+      return this.mercanciaId !== null;
     },
   },
   methods: {
     async loadModel() {
-        const remolque = await remolquesService.getRemolque(this.remolqueId);
-        console.log('remolque', remolque),
-        this.model = remolque.data;
+        const mercancia = await mercanciasService.getMercancia(this.mercanciaId);
+        console.log('mercancia', mercancia),
+        this.model = mercancia.data;
     },
-    async submitRemolqueData() {
+    async submitMercanciaData() {
       try {
-        console.info("creando remolque...");
+        console.info("creando mercancia...");
         const {
           nombre,
-          matricula,
-          marca = "",
-          modelo = "",
+          observaciones = "",
         } = this.model;
         
-        let remolque = null; 
+        let mercancia = null; 
 
         if (this.editMode) {
-            remolque = await remolquesService.updateRemolque(
-                this.remolqueId,
+            mercancia = await mercanciasService.updateMercancia(
+                this.mercanciaId,
                 nombre,
                 observaciones
             );
         } else {
-            remolque = await remolquesService.createRemolque(
+            mercancia = await mercanciasService.createMercancia(
             nombre,
             observaciones
             );
         }
-        console.info("Datos remolque: ", remolque);
+        console.info("Datos mercancia: ", mercancia);
 
-        const msg = this.editMode ? 'Remolque modificado' : 'Remolque creado';
+        const msg = this.editMode ? 'Mercancia modificado' : 'Mercancia creado';
         this.$toast.success(msg);
         setTimeout(() => {
-          this.$router.push("/remolques");
+          this.$router.push("/mercancias");
         }, 1500);
       } catch (e) {
         this.error = true;
-        const msg = this.editMode ? 'No se pudo modificar el remolque' : 'No se pudo crear el remolque';
+        const msg = this.editMode ? 'No se pudo modificar el mercancia' : 'No se pudo crear el mercancia';
         this.$toast.error(msg);
         this.handleError(e);
       }

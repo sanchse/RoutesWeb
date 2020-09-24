@@ -9,6 +9,9 @@ import Vehiculos from '../components/vehiculos.vue';
 import VehiculoPost from '../components/vehiculo-post.vue';
 import Remolques from '../components/remolques.vue';
 import RemolquePost from '../components/remolque-post.vue';
+import Mercancias from '../components/mercancias.vue';
+import MercanciaPost from '../components/mercancia-post.vue';
+
 
 export const routes = [
     { path: '/', component: Home },
@@ -22,4 +25,6 @@ export const routes = [
     { path: '/vehiculo-post/:id?', component: VehiculoPost},
     { path: '/remolques', component: Remolques },
     { path: '/remolque-post/:id?', component: RemolquePost},
+    { path: '/mercancias', component: Mercancias },
+    { path: '/mercancia-post/:id?', component: MercanciaPost},
 ]

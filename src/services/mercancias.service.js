@@ -13,15 +13,21 @@ export default class MercanciasService extends BaseHttpService {
     return this.get('mercancias' + (queryStr ? `?${queryStr}` : ''));
   }
 
-  async deleteCliente(id) {
+  async getMercancia(id) {
+    return this.get(`mercancias/${id}`);
+ }
+
+  async deleteMercancia(id) {
     await this.delete(`mercancias/${id}`);
   }
 
-  updateMercanciastatus(id, nombre, observaciones) {
+  updateMercancia(id, nombre, observaciones) {
     return this.patch(`mercancias/${id}`, { nombre, observaciones });
   }
 
-  createCliente(nombre, observaciones) {
+  createMercancia(nombre, observaciones) {
     return this.post(`mercancias`, { nombre, observaciones });
   }
 }
+
+export const mercanciasService = new MercanciasService();

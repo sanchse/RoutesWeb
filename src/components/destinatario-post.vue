@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import destinatarioFormSchema from "../forms/clienteFormSchema";
+import destinatarioFormSchema from "../forms/destinatarioFormSchema";
 import babelPolyfill from "babel-polyfill";
 import { destinatariosService } from "../services/destinatarios.service";
 
