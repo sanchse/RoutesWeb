@@ -21,16 +21,22 @@ export default class ClientesService extends BaseHttpService {
     return this.get('clientes' + (queryStr ? `?${queryStr}` : ''));
   }
 
+  async getCliente(id) {
+     return this.get(`clientes/${id}`);
+  }
+
   async deleteCliente(id) {
     await this.delete(`clientes/${id}`);
   }
 
-  updateClientestatus(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+  updateCliente(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
     return this.patch(`clientes/${id}`, { nombre, nif, domicilio, localidad, codProvincia, codPostal, observaciones });
   }
 
-  createCliente(nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.post(`clientes`, { nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
+  createCliente(nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    console.log('justo antes de llamar a la API');
+
+    return this.post(`clientes`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 }
 
