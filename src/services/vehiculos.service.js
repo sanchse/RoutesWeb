@@ -2,7 +2,7 @@ import BaseHttpService from './base-http.service';
 import queryString from 'query-string';
 
 export default class VehiculosService extends BaseHttpService {
-  fetchVehiculos({ matricula, search}) {
+  fetchVehiculos({ matricula, search }) {
     const queryObj = {};
 
     if (matricula.length) {
@@ -17,15 +17,19 @@ export default class VehiculosService extends BaseHttpService {
     return this.get('vehiculos' + (queryStr ? `?${queryStr}` : ''));
   }
 
-  async deleteCliente(id) {
+  async getVehiculo(id) {
+    return this.get(`vehiculos/${id}`);
+  }
+
+  async deleteVehiculo(id) {
     await this.delete(`vehiculos/${id}`);
   }
 
-  updateVehiculostatus(id, nombre, matricula, marca, modelo) {
+  updateVehiculo(id, nombre, matricula, marca, modelo) {
     return this.patch(`vehiculos/${id}`, { nombre, matricula, marca, modelo });
   }
 
-  createCliente(nombre, matricula, marca, modelo) {
+  createVehiculo(nombre, matricula, marca, modelo) {
     return this.post(`vehiculos`, { nombre, matricula, marca, modelo });
   }
 }

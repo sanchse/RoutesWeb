@@ -25,6 +25,9 @@
             <router-link to="/transportistas" active-class="active" class="nav-item" tag="li">
               <a class="nav-link">Transportistas</a>
             </router-link>
+            <router-link to="/destinatarios" active-class="active" class="nav-item" tag="li">
+              <a class="nav-link">Destinatarios</a>
+            </router-link>
           </ul>
         </div>
       </div>

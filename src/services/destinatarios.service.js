@@ -21,15 +21,21 @@ export default class DestinatariosService extends BaseHttpService {
     return this.get('destinatarios' + (queryStr ? `?${queryStr}` : ''));
   }
 
-  async deleteCliente(id) {
+  async getDestinatario(id) {
+    return this.get(`destinatarios/${id}`);
+ }
+
+  async deleteDestinatario(id) {
     await this.delete(`destinatarios/${id}`);
   }
 
-  updateDestinatariostatus(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+  updateDestinatario(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
     return this.patch(`destinatarios/${id}`, { nombre, nif, domicilio, localidad, codProvincia, codPostal, observaciones });
   }
 
-  createCliente(nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.post(`destinatarios`, { nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
+  createDestinatario(nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    return this.post(`destinatarios`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 }
+
+export const destinatariosService = new DestinatariosService();
