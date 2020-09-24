@@ -17,15 +17,21 @@ export default class RemolquesService extends BaseHttpService {
     return this.get('remolques' + (queryStr ? `?${queryStr}` : ''));
   }
 
-  async deleteCliente(id) {
+  async getRemolque(id) {
+    return this.get(`remolques/${id}`);
+ }
+
+  async deleteRemolque(id) {
     await this.delete(`remolques/${id}`);
   }
 
-  updateRemolquestatus(id, nombre, matricula, marca, modelo) {
+  updateRemolque(id, nombre, matricula, marca, modelo) {
     return this.patch(`remolques/${id}`, { nombre, matricula, marca, modelo });
   }
 
-  createCliente(nombre, matricula, marca, modelo) {
+  createRemolque(nombre, matricula, marca, modelo) {
     return this.post(`remolques`, { nombre, matricula, marca, modelo });
   }
 }
+
+export const remolquesService = new RemolquesService();

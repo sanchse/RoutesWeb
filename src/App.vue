@@ -28,6 +28,15 @@
             <router-link to="/destinatarios" active-class="active" class="nav-item" tag="li">
               <a class="nav-link">Destinatarios</a>
             </router-link>
+            <router-link to="/vehiculos" active-class="active" class="nav-item" tag="li">
+              <a class="nav-link">Vehiculos</a>
+            </router-link>
+            <router-link to="/remolques" active-class="active" class="nav-item" tag="li">
+              <a class="nav-link">Remolques</a>
+            </router-link>
+            <router-link to="/mercancias" active-class="active" class="nav-item" tag="li">
+              <a class="nav-link">Mercancias</a>
+            </router-link>
           </ul>
         </div>
       </div>

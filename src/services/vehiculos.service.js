@@ -33,3 +33,5 @@ export default class VehiculosService extends BaseHttpService {
     return this.post(`vehiculos`, { nombre, matricula, marca, modelo });
   }
 }
+
+export const vehiculosService = new VehiculosService();
