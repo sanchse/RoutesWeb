@@ -80,14 +80,10 @@
 <script>
 import babelPolyfill from "babel-polyfill";
 import { clientesService } from "../services/clientes.service";
-import ClienteConfirmationModal from "../components/cliente-confirmation-modal.vue";
 import provinciasFile from "../assets/provincias.json";
 
 export default {
   name: "Clientes",
-  components: {
-    ClienteConfirmationModal: ClienteConfirmationModal,
-  },
   mounted() {
     this.obtenerClientes();
   },

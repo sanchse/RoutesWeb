@@ -2,7 +2,7 @@ import BaseHttpService from './base-http.service';
 import queryString from 'query-string';
 
 export default class TransportistasService extends BaseHttpService {
-  fetchTransportistas({ nif, codProvincia, search}) {
+  fetchTransportistas({ nif, codProvincia, search }) {
     const queryObj = {};
 
     if (nif.length) {
@@ -10,7 +10,7 @@ export default class TransportistasService extends BaseHttpService {
     }
 
     if (codProvincia.length) {
-        queryObj.codProvincia = codProvincia;
+      queryObj.codProvincia = codProvincia;
     }
 
     if (search.length) {
@@ -21,15 +21,21 @@ export default class TransportistasService extends BaseHttpService {
     return this.get('transportistas' + (queryStr ? `?${queryStr}` : ''));
   }
 
-  async deleteCliente(id) {
+  async getTransportista(id) {
+    return this.get(`transportistas/${id}`);
+  }
+
+  async deleteTransportista(id) {
     await this.delete(`transportistas/${id}`);
   }
 
-  updateTransportistastatus(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+  updateTransportista(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
     return this.patch(`transportistas/${id}`, { nombre, nif, domicilio, localidad, codProvincia, codPostal, observaciones });
   }
 
-  createCliente(nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+  createTransportista(nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
     return this.post(`transportistas`, { nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 }
+
+export const transportistasService = new TransportistasService();

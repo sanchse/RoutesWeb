@@ -34,8 +34,6 @@ export default class ClientesService extends BaseHttpService {
   }
 
   createCliente(nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    console.log('justo antes de llamar a la API');
-
     return this.post(`clientes`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 }
