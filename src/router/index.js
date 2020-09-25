@@ -15,7 +15,7 @@ import Rutas from '../components/rutas.vue';
 import RutaDetalle from '../components/ruta-detalle.vue';
 
 export const routes = [
-    { path: '/', component: Home, children },
+    { path: '/', component: Home },
     { path: '/clientes', component: Clientes }, 
     { path: '/cliente-post/:id?', component: ClientePost },
     { path: '/transportistas', component: Transportistas },
