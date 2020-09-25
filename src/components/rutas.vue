@@ -2,9 +2,14 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex flex-column align-items-start">
-        <h2>Inicio</h2>
-        <span class="text-muted">Rutas disponibles</span>
+        <h2>Rutas</h2>
+        <span class="text-muted">Listado de rutas</span>
       </div>
+      <router-link to="/ruta-post" class="btn btn-primary">Crear</router-link>
+    </div>
+    <div class="float-left">
+        <label for="rutasDisponibles">Filtrar Finalizadas</label>
+        <input type="checkbox" name="rutasDisponibles" id="rutasDisponible" v-model="filtrarRutas" @change="search">
     </div>
     <div class="float-right">
       <label for="buscarRuta">Buscar</label>
@@ -37,14 +42,28 @@
             <td>{{ ruta.destino }}</td>
             <td>{{ ruta.mercancia.nombre }}</td>
             <td>{{ ruta.vehiculo.nombre }}</td>
-
+            
             <td :id="'btn_' + ruta.id">
               <div class="button-group" style="display: inline-block">
                 <router-link
-                  :to="`/ruta-detalle/${ruta.id}`"
+                  :to="`/ruta-post/${ruta.id}`"
                   class="btn btn-secondary a-btn-slide-text"
-                  >Ver</router-link
+                  >Editar</router-link
                 >
+
+                <a
+                  href="#"
+                  @click="confirmDelete(ruta.id)"
+                  class="btn btn-primary a-btn-slide-text"
+                >
+                  <span
+                    class="glyphicon glyphicon-remove"
+                    aria-hidden="true"
+                  ></span>
+                  <span>
+                    <strong>Borrar</strong>
+                  </span>
+                </a>
               </div>
             </td>
           </tr>
@@ -86,22 +105,33 @@ export default {
   data() {
     return {
       rutas: [],
+      filtrarRutas: false,
       cargando: true,
       error: false,
       confirmModal: false,
       selectedRutaId: null,
       provincias: provinciasFile.provincias,
-      buscar: "",
+      buscar: '',
     };
   },
-  computed: {},
-  methods: {    
+  computed: {
+    
+  },
+  methods: {
+      filtrar(rutas) {
+        const now = new Date();
+        return rutas.filter((ruta) => {
+            const date = new Date(ruta.fechaEnvio);
+            return date >= now;
+        });
+      },
+    
     provinciaString(id) {
       const provincia = this.provincias.filter(function (data) {
         return data.id == id;
       });
 
-      return provincia || provincia.length ? provincia[0].name : "";
+      return provincia || provincia.length ? provincia[0].name : '';
     },
     confirmDelete(id) {
       this.selectedRutaId = id;
@@ -129,12 +159,12 @@ export default {
       }
     },
     async search() {
-      console.log("buscando...");
+      console.log('buscando...');
       this.fetchRutas(this.buscar);
     },
     async fetchRutas(searchText) {
       try {
-        this.cargando = true;
+          this.cargando = true;
         this.rutas = [];
         console.info("Obteniendo rutas...");
         const datos = await rutasService.fetchRutas({
@@ -144,7 +174,7 @@ export default {
         });
 
         if (datos) {
-          this.rutas = this.filtrarRutas(datos.data);
+          this.rutas = this.filtrarRutas ? this.filtrar(datos.data) : datos.data;
           this.cargando = false;
         }
       } catch (e) {
@@ -153,15 +183,7 @@ export default {
       }
     },
     async obtenerRutas() {
-      this.fetchRutas("");
-    },
-
-    filtrarRutas(rutas) {
-      const now = new Date();
-      return rutas.filter((ruta) => {
-        const date = new Date(ruta.fechaEnvio);
-        return date >= now;
-      });
+      this.fetchRutas('');
     },
 
     handleError(error) {

@@ -19,6 +19,9 @@
             <router-link to="/" exact active-class="active" class="nav-item" tag="li">
               <a class="nav-link">Inicio</a>
             </router-link>
+            <router-link to="/rutas" active-class="active" class="nav-item" tag="li">
+              <a class="nav-link">Rutas</a>
+            </router-link>
             <router-link to="/clientes" active-class="active" class="nav-item" tag="li">
               <a class="nav-link">Clientes</a>
             </router-link>

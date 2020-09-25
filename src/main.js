@@ -7,6 +7,7 @@ import AuthService from './services/auth.service';
 import 'bootstrap'; 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import moment from 'moment';
 import VueFormGenerator from 'vue-form-generator'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
@@ -50,6 +51,13 @@ Vue.use(VueFormGenerator);
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
+
+//Filters
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('DD/MM/YYYY')
+  }
+});
 
 const router = new VueRouter({
   routes

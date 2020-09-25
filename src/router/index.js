@@ -11,7 +11,7 @@ import Remolques from '../components/remolques.vue';
 import RemolquePost from '../components/remolque-post.vue';
 import Mercancias from '../components/mercancias.vue';
 import MercanciaPost from '../components/mercancia-post.vue';
-
+import Rutas from '../components/rutas.vue';
 
 export const routes = [
     { path: '/', component: Home },
@@ -27,4 +27,5 @@ export const routes = [
     { path: '/remolque-post/:id?', component: RemolquePost},
     { path: '/mercancias', component: Mercancias },
     { path: '/mercancia-post/:id?', component: MercanciaPost},
+    { path: '/rutas', component: Rutas}, 
 ]
