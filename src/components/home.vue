@@ -6,7 +6,7 @@
         <span class="text-muted">Rutas disponibles</span>
       </div>
     </div>
-    <div class="float-right">
+    <!-- <div class="float-right">
       <label for="buscarRuta">Buscar</label>
       <input
         type="search"
@@ -15,7 +15,7 @@
         v-model="buscar"
         @keyup.enter.prevent="search"
       />
-    </div>
+    </div> -->
     <div class="table-responsive-md mt-5 bg-white">
       <div class="text-center" v-if="error">Error de conexión</div>
       <div class="text-center" v-if="!error && cargando">Cargando rutas</div>
@@ -81,10 +81,20 @@ import provinciasFile from "../assets/provincias.json";
 export default {
   name: "Rutas",
   mounted() {
-    this.obtenerRutas();
+    if (this.conectado) {
+      this.obtenerRutas();
+    } else {
+      const datosRutas = localStorage.getItem('RutasHabiles');
+
+      if (datosRutas !== undefined && datosRutas != null) {
+        this.rutas = datosRutas;
+      }
+    }
+    this.cargando = false;
   },
   data() {
     return {
+      conectado: false,
       rutas: [],
       cargando: true,
       error: false,
@@ -145,6 +155,7 @@ export default {
 
         if (datos) {
           this.rutas = this.filtrarRutas(datos.data);
+          localStorage.setItem('RutasHabiles', this.rutas);
           this.cargando = false;
         }
       } catch (e) {
