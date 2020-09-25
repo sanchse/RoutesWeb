@@ -57,7 +57,7 @@ export default {
   methods: {
     async loadModel() {
         const vehiculo = await vehiculosService.getVehiculo(this.vehiculoId);
-        console.log('vehiculo', vehiculo),
+        
         this.model = vehiculo.data;
     },
     async submitVehiculoData() {

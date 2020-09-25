@@ -63,7 +63,7 @@ export default {
   methods: {
     async loadModel() {
         const cliente = await clientesService.getCliente(this.clienteId);
-        console.log('cliente', cliente),
+        
         this.model = cliente.data;
         this.model.provincia = '' + this.model.codProvincia;
     },
@@ -82,8 +82,6 @@ export default {
         } = this.model;
         const codProvincia = this.codProvincia;
 
-        console.log(`observaciones: "${observaciones}"`);
-        console.log(`codProvincia: "${codProvincia}"`);
         let cliente = null; 
 
         if (this.editMode) {

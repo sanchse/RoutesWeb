@@ -63,7 +63,7 @@ export default {
   methods: {
     async loadModel() {
         const destinatario = await destinatariosService.getDestinatario(this.destinatarioId);
-        console.log('destinatario', destinatario),
+        
         this.model = destinatario.data;
         this.model.provincia = '' + this.model.codProvincia;
     },
@@ -82,8 +82,6 @@ export default {
         } = this.model;
         const codProvincia = this.codProvincia;
 
-        console.log(`observaciones: "${observaciones}"`);
-        console.log(`codProvincia: "${codProvincia}"`);
         let destinatario = null; 
 
         if (this.editMode) {

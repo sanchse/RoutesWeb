@@ -63,7 +63,7 @@ export default {
   methods: {
     async loadModel() {
         const transportista = await transportistasService.getTransportista(this.transportistaId);
-        console.log('transportista', transportista),
+        
         this.model = transportista.data;
         this.model.provincia = '' + this.model.codProvincia;
     },
@@ -82,8 +82,6 @@ export default {
         } = this.model;
         const codProvincia = this.codProvincia;
 
-        console.log(`observaciones: "${observaciones}"`);
-        console.log(`codProvincia: "${codProvincia}"`);
         let transportista = null; 
 
         if (this.editMode) {

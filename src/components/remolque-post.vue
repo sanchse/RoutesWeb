@@ -57,7 +57,7 @@ export default {
   methods: {
     async loadModel() {
         const remolque = await remolquesService.getRemolque(this.remolqueId);
-        console.log('remolque', remolque),
+
         this.model = remolque.data;
     },
     async submitRemolqueData() {
