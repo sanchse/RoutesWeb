@@ -77,17 +77,20 @@
 import babelPolyfill from "babel-polyfill";
 import { rutasService } from "../services/rutas.service";
 import provinciasFile from "../assets/provincias.json";
+import { healthService } from '../services/health.service';
 
 export default {
   name: "Rutas",
+  created() {
+    this.comprobarConexion();
+    },
   mounted() {
     if (this.conectado) {
       this.obtenerRutas();
     } else {
       const datosRutas = localStorage.getItem('RutasHabiles');
-
       if (datosRutas !== undefined && datosRutas != null) {
-        this.rutas = datosRutas;
+        this.rutas = JSON.parse(datosRutas);
       }
     }
     this.cargando = false;
@@ -104,8 +107,30 @@ export default {
       buscar: "",
     };
   },
+  watch: {
+    conectado: function (newValue, oldValue) {
+      this.$emit('connectionChange', newValue);
+      this.obtenerRutas();
+    },
+  },
   computed: {},
   methods: {    
+    comprobarConexion() {
+      var vm = this;
+      setInterval(
+        function () {          
+          healthService.checkHealth()
+            .then((data) => {
+              //console.log('check: ', data);
+              vm.conectado = data.status === 200;            
+            })
+            .catch(() => {
+              vm.conectado =false;
+            })
+        }.bind(vm),
+        7500
+      );
+    },
     provinciaString(id) {
       const provincia = this.provincias.filter(function (data) {
         return data.id == id;
@@ -155,7 +180,7 @@ export default {
 
         if (datos) {
           this.rutas = this.filtrarRutas(datos.data);
-          localStorage.setItem('RutasHabiles', this.rutas);
+          localStorage.setItem('RutasHabiles', JSON.stringify(this.rutas));
           this.cargando = false;
         }
       } catch (e) {
@@ -191,3 +216,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

@@ -12,6 +12,11 @@ import VueFormGenerator from 'vue-form-generator'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(VueMaterial)
 
 const toastOpotions = {
   transition: "Vue-Toastification__bounce",
