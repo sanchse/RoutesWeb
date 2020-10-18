@@ -5,11 +5,11 @@ export default class RemolquesService extends BaseHttpService {
   fetchRemolques({ matricula, search}) {
     const queryObj = {};
 
-    if (matricula.length) {
+    if (this.isInitialize(matricula)) {
       queryObj.nif = matricula;
     }
 
-    if (search.length) {
+    if (this.isInitialize(search)) {
       queryObj.search = search;
     }
 
@@ -31,6 +31,10 @@ export default class RemolquesService extends BaseHttpService {
 
   createRemolque(nombre, matricula, marca, modelo) {
     return this.post(`remolques`, { nombre, matricula, marca, modelo });
+  }
+
+  isInitialize(obj) {
+    return obj !== undefined && obj !== null && obj.length;
   }
 }
 

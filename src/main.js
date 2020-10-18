@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import moment from 'moment';
 import VueFormGenerator from 'vue-form-generator'
+import 'vue-form-generator/dist/vfg.css'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -48,6 +49,7 @@ Vue.use(ModalPlugin)
 
 // This imports <b-card> along with all the <b-card-*> sub-components as a plugin:
 import { CardPlugin } from 'bootstrap-vue'
+
 Vue.use(CardPlugin)
 
 Vue.use(Toast, toastOpotions);
@@ -64,8 +66,15 @@ Vue.filter('formatDate', function(value) {
   }
 });
 
+Vue.filter('formatNumber', function(value) {
+  if (value) {
+    return Number(value).toLocaleString();
+  }
+});
+
 const router = new VueRouter({
-  routes
+  //mode: 'history',
+  routes,
 });
 
 new Vue({

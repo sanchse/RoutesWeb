@@ -51,12 +51,14 @@ export default class RutasService extends BaseHttpService {
     await this.delete(`rutas/${id}`);
   }
 
-  updateRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clientesId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId) {
-    return this.patch(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clientesId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId });
+  updateRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId) {
+    return this.patch(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId });
   }
 
-  createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clientesId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId) {
-    return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clientesId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId });
+  createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId) {
+    console.log('create post...');
+    console.log('  - FechaEnvio: ' + fechaEnvio);
+    return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId });
   }
 }
 

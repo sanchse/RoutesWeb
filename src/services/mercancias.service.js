@@ -5,7 +5,7 @@ export default class MercanciasService extends BaseHttpService {
   fetchMercancias({ search}) {
     const queryObj = {};
 
-    if (search.length) {
+    if (this.isInitialize(search)) {
       queryObj.search = search;
     }
 
@@ -27,6 +27,10 @@ export default class MercanciasService extends BaseHttpService {
 
   createMercancia(nombre, observaciones) {
     return this.post(`mercancias`, { nombre, observaciones });
+  }
+
+  isInitialize(obj) {
+    return obj !== undefined && obj !== null && obj.length;
   }
 }
 

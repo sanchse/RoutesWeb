@@ -5,15 +5,15 @@ export default class ClientesService extends BaseHttpService {
   fetchClientes({ nif, codProvincia, search}) {
     const queryObj = {};
 
-    if (nif.length) {
+    if (this.isInitialize(nif)) {
       queryObj.nif = nif;
     }
 
-    if (codProvincia.length) {
+    if (this.isInitialize(codProvincia)) {
         queryObj.codProvincia = codProvincia;
     }
 
-    if (search.length) {
+    if (this.isInitialize(search)) {  
       queryObj.search = search;
     }
 
@@ -35,6 +35,10 @@ export default class ClientesService extends BaseHttpService {
 
   createCliente(nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
     return this.post(`clientes`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
+  }
+
+  isInitialize(obj) {
+    return obj !== undefined && obj !== null && obj.length;
   }
 }
 

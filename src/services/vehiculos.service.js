@@ -5,11 +5,11 @@ export default class VehiculosService extends BaseHttpService {
   fetchVehiculos({ matricula, search }) {
     const queryObj = {};
 
-    if (matricula.length) {
+    if (this.isInitialize(matricula)) {
       queryObj.nif = matricula;
     }
 
-    if (search.length) {
+    if (this.isInitialize(search)) {
       queryObj.search = search;
     }
 
@@ -31,6 +31,10 @@ export default class VehiculosService extends BaseHttpService {
 
   createVehiculo(nombre, matricula, marca, modelo) {
     return this.post(`vehiculos`, { nombre, matricula, marca, modelo });
+  }
+
+  isInitialize(obj) {
+    return obj !== undefined && obj !== null && obj.length;
   }
 }
 

@@ -114,7 +114,7 @@ export default {
         this.$toast.success(msg);
         setTimeout(() => {
           this.$router.push("/clientes");
-        }, 2000);
+        }, 1500);
       } catch (e) {
         this.error = true;
         const msg = this.editMode ? 'No se pudo modificar el cliente' : 'No se pudo crear el cliente';
