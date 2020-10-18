@@ -202,8 +202,7 @@ export default {
                     remolque,
                     mercancia
                 );
-            } else {
-                console.log('jar');
+            } else {                
               ruta = await rutasService.createRuta(
                     new Date(fechaEnvio),
                     origen,

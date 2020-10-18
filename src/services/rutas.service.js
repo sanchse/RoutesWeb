@@ -56,8 +56,6 @@ export default class RutasService extends BaseHttpService {
   }
 
   createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId) {
-    console.log('create post...');
-    console.log('  - FechaEnvio: ' + fechaEnvio);
     return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId });
   }
 }
