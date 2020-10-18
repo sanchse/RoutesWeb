@@ -152,7 +152,7 @@ export default {
       } else {
         console.error("error 401");
         this.$emit("renove-token");
-        this.$router.push("/");
+        this.$router.push("/").catch(err => {});
       }
     },
   },

@@ -42,6 +42,8 @@ import { vehiculosService } from "../services/vehiculos.service";
 import { remolquesService } from "../services/remolques.service";
 import { mercanciasService } from "../services/mercancias.service";
 import { rutasService } from '../services/rutas.service';
+import Pikaday from "pikaday";
+import "pikaday/css/pikaday.css";
 
 export default {
   data() {
@@ -247,7 +249,7 @@ export default {
       } else {
         console.error("error 401");
         this.$emit("renove-token");
-        this.$router.push("/");
+        this.$router.push("/").catch(err => {});
       }
     },
   },

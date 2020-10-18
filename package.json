@@ -16,6 +16,7 @@
     "bootstrap-vue": "^2.17.3",
     "jquery": "^3.5.1",
     "moment": "^2.29.0",
+    "pikaday": "^1.8.0",
     "popper.js": "^1.16.1",
     "save": "^2.4.0",
     "vue": "^2.5.11",

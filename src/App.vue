@@ -105,6 +105,7 @@
 import babelPolyfill from "babel-polyfill";
 import { authService } from "./services/auth.service";
 import { healthService } from './services/health.service';
+import "bootstrap/dist/css/bootstrap.css";
 
 export default {
   data() {
@@ -131,15 +132,16 @@ export default {
       authService.signout();
       authService.signin("admin", "12345aA$");
     },
+    hasToken() {
+      const token = localStorage.getItem("accessToken");
+      return token ? true : false;
+    },
   },
   computed: {
     conectadoStr() {
       this.conectado ? "Conectado" : "Sin conexión";
     },
-    hasToken() {
-      const token = localStorage.getItem("accessToken");
-      return token ? true : false;
-    },
+    
   },
 };
 </script>
