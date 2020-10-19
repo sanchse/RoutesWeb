@@ -1,11 +1,29 @@
 import VueFormGenerator from 'vue-form-generator'
 import moment from 'moment';
+import vueMaterial from 'vue-material';
 
 
 export default {
     groups: [{
         legend: 'Datos de Ruta',
         fields: [
+            {
+                type: 'pikaday',
+                label: 'Fecha Prueba',
+                placeholder: 'Fecha de Prueba',
+                model: 'fechaPrueba',
+                validator: VueFormGenerator.validators.date,                
+                pikadayOptions: {
+                    position: 'top left',    
+                    format: 'DD/MM/YYYY',     
+                    onSelect: function(date) {
+                        vm.model.fechaPrueba = date;
+                        
+                    },         
+                },
+            },
+
+
             {
                 type: 'input',
                 inputType: 'text',
@@ -33,16 +51,18 @@ export default {
                 label: 'Fecha de envío',
                 placeholder: 'Fecha del transporte',
                 model: 'fechaEnvio',
-                validator: VueFormGenerator.validators.date,
+                validator: VueFormGenerator.validators.date,                
                 pikadayOptions: {
                     position: 'top left',
-                    minDate: Date.now(),
+                    // onSelect: (e) => {
+                    //     console.log(e);
+                    // },                    
                     firstDay: 1,
-                    format: 'DD/MM/YYYY',
+                    format: 'DD/MM/YYYY',                    
                     i18n: {
                         previousMonth: 'Anterior',
                         nextMonth: 'Siguiente',
-                        months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                         weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                         weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Ju', 'Vie', 'Sab'],
                     },

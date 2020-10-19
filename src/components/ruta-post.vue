@@ -42,8 +42,8 @@ import { vehiculosService } from "../services/vehiculos.service";
 import { remolquesService } from "../services/remolques.service";
 import { mercanciasService } from "../services/mercancias.service";
 import { rutasService } from '../services/rutas.service';
-import Pikaday from "pikaday";
-import "pikaday/css/pikaday.css";
+// import Pikaday from "pikaday";
+// import "pikaday/css/pikaday.css";
 
 export default {
   data() {
@@ -54,10 +54,13 @@ export default {
       vehiculos: [],
       remolques: [],
       mercancias: [],
-      model: {},
+      model: {
+          fechaPrueba: new Date().valueOf()
+      },
       schema: rutaFormSchema,
       formOptions: {
-        validateAfterChanged: true,
+        validateAfterLoad: false,
+        validateAfterChanged: true
       },
       isSaving: false,
       error: false,
@@ -71,7 +74,8 @@ export default {
       }
   },
   created() {
-      
+      this.model.fechaEnvio = Date.now();
+      //this.model.fechaPrueba = Date.now();
   },
   beforeRouteEnter(to, from, next) {
       next(vm => {          
@@ -137,17 +141,12 @@ export default {
       });
   },
   mounted() {
-      if (this.$route.params.id !== undefined) {
+    if (this.$route.params.id !== undefined) {
       this.rutaId = this.$route.params.id;
       this.loadModel();
     }
   },
   methods: {
-    //   async getClientes() { 
-    //     const clientes = await clientesService.fetchClientes({});
-    //     console.log('clientes', clientes);
-    //     this.clientes = clientes.data.map(({ id, nombre }) => { return {id, name: nombre} });
-    //   },
       async loadModel() {                  
         const ruta = await rutasService.getRuta(this.rutaId);
         
@@ -162,9 +161,7 @@ export default {
         this.model.remolque = remolqueId;
         this.model.mercancia = mercanciaId;    
       },
-      async submitData() {
-          //TODO: procesar la creacion/modificacion dee datos
-          console.log('Enviar datos...');
+      async submitData() {          
           this.isSaving = true;
           try {
               const { 
@@ -254,7 +251,7 @@ export default {
     },
   },
   computed: {
-      editMode: function () {
+    editMode: function () {
       return this.rutaId !== null;
     },
   },
