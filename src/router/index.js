@@ -13,7 +13,7 @@ import Mercancias from '../components/mercancias.vue';
 import MercanciaPost from '../components/mercancia-post.vue';
 import Rutas from '../components/rutas.vue';
 import RutaDetalle from '../components/ruta-detalle.vue';
-import RutaPost from '../components/ruta-post.vue';
+import RutaPost from '../components/ruta-post2.vue';
 
 export const routes = [
     { path: '/', component: Home },

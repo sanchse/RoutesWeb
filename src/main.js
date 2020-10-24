@@ -16,6 +16,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import PortalVue from 'portal-vue'
 
 
 Vue.use(VueMaterial)
@@ -43,6 +44,9 @@ const toastOpotions = {
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(PortalVue)
+
 
 // This imports <b-modal> as well as the v-b-modal directive as a plugin:
 import { ModalPlugin } from 'bootstrap-vue'

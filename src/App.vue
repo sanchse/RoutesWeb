@@ -105,7 +105,8 @@
 import babelPolyfill from "babel-polyfill";
 import { authService } from "./services/auth.service";
 import { healthService } from './services/health.service';
-import "bootstrap/dist/css/bootstrap.css";
+//import "bootstrap/dist/css/bootstrap.css";
+
 
 export default {
   data() {

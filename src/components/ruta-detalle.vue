@@ -6,58 +6,70 @@
       >
     </div>
 
-    <h5>DOCUMENTO DE CONTROL DE TRANSPORTE PÚBLICO DE MERCANCÍAS POR CARRETERA</h5>
+    <div>
+      <h5>DOCUMENTO DE CONTROL ADMINISTRATIVO PARA LA REALIZACIÓN DE TRANSPORTE PÚBLICO DE MERCANCÍAS POR CARRETERA</h5>
+      <strong>(Orden FOM/2861/2012, BOE nº 5, de 5 de enero de 2013)</strong>
+    </div>
     <div class="container-fluid">
       <md-content>
         <md-card>
           <md-card-header>
             <div class="md-title">Datos del cargador contractual</div>
+            <span>(cargador efectivo u otro operador que contrate el transporte o intermidie en su contratación)</span>
           </md-card-header>
 
           <md-card-content>
               <div class="wrapper">
-                  <div>
-                    <label for="nombrecliente">Nombre o denominación social</label>
+                  <div class="titulo" style="width: 25%">
+                    <label for="nombrecliente" >Nombre o denominación social</label>
                   </div>
-                  <div>
-                    <span class="wrapper" id="nombrecliente">{{ruta.cliente.nombre}}</span>
+                  <div class="dato">
+                    <span class="" id="nombrecliente">{{ruta.cliente.nombre}}</span>
                   </div>
-                  <div class="col-sm-4">
-                    <label for="nifcliente">NIF</label>
-                  </div>
-                  <div class="col-sm-4">
-                    <span>{{ruta.cliente.nif}}</span>
-                  </div>
+                  
               </div>
               
               <div class="wrapper">
+                  <div class="col-sm-4">
+                    <label for="nifcliente">NIF</label>
+                  </div>
+                  <div class="col-sm-4 dato">
+                    <span>{{ruta.cliente.nif}}</span>
+                  </div>
                   <div>
                     <label for="provinciacliente">Provincia</label>
                   </div>
-                <div>
+                <div class="dato">
                     <span>{{ this.provinciaString(ruta.cliente.codProvincia)}}</span>
-                </div>
-                <div>
-                    <label for="localidadcliente">Poblacion</label>
-                </div>
-                <div>
-                    <span>{{ruta.cliente.localidad}}</span>
-                </div>
+                </div>                
               </div>
 
             <div class="wrapper">
                 <div>
+                    <label for="localidadcliente">Poblacion</label>
+                </div>
+                <div class="dato">
+                    <span>{{ruta.cliente.localidad}}</span>
+                </div>
+                <div>
                     <label for="codpostalcliente">Código postal</label>
                 </div>
-                <div>
+                <div class="dato">
                     <span>{{ruta.cliente.codPostal}}</span>
                 </div>
-                <div>
-                    <label for="observacionescliente">Observaciones del cargador</label>
-                </div>
-                <div>
-                    <span>{{ruta.cliente.observaciones}}</span>
-                </div>
+                
+            </div>
+
+            <div class="wrapper">
+              <div>
+                  <label for="observacionescliente">Observaciones del cargador</label>
+              </div>
+            </div>
+
+            <div class="wrapper">
+              <div class="dato" style="height: 100px;">
+                  <span>{{ruta.cliente.observaciones}}</span>
+              </div>
             </div>
         </md-card-content>
         </md-card>
@@ -66,33 +78,52 @@
       <md-card>
           <md-card-header>
             <div class="md-title">Datos del transportista efectivo</div>
+            <span>(titular de la autorización de transporte)</span>
           </md-card-header>
 
           <md-card-content>
-              <div>
-                <label for="nombretransportista">Nombre o denominación social</label>
-                <span id="nombretransportista">{{ruta.transportista.nombre}}</span>
-              </div>
-              <div>
-                <label for="niftransportista">NIF</label>
-                <span>{{ruta.transportista.nif}}</span>
-              </div>
-              <div>
-                <label for="provinciatransportista">Provincia</label>
-                <span>{{ this.provinciaString(ruta.transportista.codProvincia)}}</span>
-              </div>
-              <div>
-                <label for="localidadtransportista">Poblacion</label>
-                <span>{{ruta.transportista.localidad}}</span>
-              </div>
-              <div>
-                <label for="codpostaltransportista">Código postal</label>
-                <span>{{ruta.transportista.codPostal}}</span>
-              </div>
-              <div>
-                <label for="observacionestransportista">Observaciones del cargador</label>
-                <span>{{ruta.transportista.observaciones}}</span>
-              </div>
+              <div class="wrapper">
+                <div>
+                  <label for="nombretransportista">Nombre o denominación social</label>
+                </div>
+                <div class="dato">
+                  <span id="nombretransportista">{{ruta.transportista.nombre}}</span>
+                </div>
+                <div>
+                  <label for="niftransportista">NIF</label>
+                </div>
+                <div class="dato">
+                  <span>{{ruta.transportista.nif}}</span>
+                </div>
+              </div>              
+              <div class="wrapper">
+                <div>
+                  <label for="provinciatransportista">Provincia</label>
+                </div>
+                <div class="dato">
+                  <span>{{ this.provinciaString(ruta.transportista.codProvincia)}}</span>
+                </div>
+                <div>
+                  <label for="localidadtransportista">Poblacion</label>
+                </div>
+                <div class="dato">
+                  <span>{{ruta.transportista.localidad}}</span>
+                </div>
+              </div>              
+              <div class="wrapper">
+                <div>
+                  <label for="codpostaltransportista">Código postal</label>
+                </div>
+                <div class="dato">
+                  <span>{{ruta.transportista.codPostal}}</span>
+                </div>
+                <div>
+                  <label for="observacionestransportista">Observaciones del cargador</label>
+                </div>
+                <div class="dato">
+                  <span>{{ruta.transportista.observaciones}}</span>
+                </div>
+              </div>            
         </md-card-content>
         </md-card>
   
@@ -265,10 +296,13 @@ export default {
   display: flex;
 }
 
-.wrapper > label {
+.wrapper > div > label {
   font-weight: bold;
 }
 
+.wrapper > div > span {
+  background-color: white;
+}
 .wrapper > div {
   font-size: 2vh;
   color: gray;
@@ -277,5 +311,14 @@ export default {
   padding: 0.3em;
   border-radius: 3px;
   flex: 1;
+}
+
+.titulo {
+  width: 25% !important;
+}
+.dato {
+  border-style: solid;
+  border-width: thin;
+  background: rgb(255, 255, 255) !important;
 }
 </style>
