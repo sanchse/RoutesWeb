@@ -1,9 +1,11 @@
 <template>
   <div class="container">
     <div class="d-flex justify-content-start mb-3">
-      <router-link to="/" class="btn btn-sm btn-outline-secondary"
+      <!-- <router-link :to="comingFromHome() ? '/' : '/rutas'" class="btn btn-sm btn-outline-secondary"
         >Volver</router-link
-      >
+      > -->
+
+      <a @click="$router.go(-1)" class="btn btn-sm btn-outline-secondary">Volver</a>
     </div>
 
     <div style="display: inline-block">
@@ -213,7 +215,7 @@
               <label for="numBultos">Número de bultos</label>
             </div>
             <div class="dato">
-              <span>{{ ruta.numberoBultos }}</span>
+              <span>{{ ruta.numeroBultos }}</span>
             </div>
           </div>
 
@@ -380,6 +382,7 @@ export default {
   data() {
     return {
       rutaId: null,
+      from: 'home',
       ruta: {
         cliente: {
           nombre: "",
@@ -414,8 +417,22 @@ export default {
       this.rutaId = this.$route.params.id;
       this.getRuta(this.$route.params.id);
     }
+
+    if (this.$route.params.from !== undefined) {
+      this.from = this.$route.params.from;
+    }
+  },  
+  watch: {
+    $route(to) {
+      this.rutaId = to.params.id;
+      this.from = to.params.from !== undefined ? to.params.from : this.from;
+      this.getRuta(this.id);
+    },
   },
-  methods: {    
+  methods: {
+    comingFromHome() {
+      return this.from.toLowerCase() === 'home'; 
+    },   
     getRuta(id) {
       const vm = this;
 

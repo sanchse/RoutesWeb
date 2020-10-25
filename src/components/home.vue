@@ -40,11 +40,9 @@
 
             <td :id="'btn_' + ruta.id">
               <div class="button-group" style="display: inline-block">
-                <router-link
-                  :to="`/ruta-detalle/${ruta.id}`"
-                  class="btn btn-secondary a-btn-slide-text"
-                  >Ver</router-link
-                >
+                <router-link :to="`/ruta-detalle/${ruta.id}`" title="Ver" class="">
+                  <md-icon>visibility</md-icon>
+                </router-link>
               </div>
             </td>
           </tr>
@@ -85,15 +83,7 @@ export default {
     this.comprobarConexion();
     },
   mounted() {
-    if (this.conectado) {
-      this.obtenerRutas();
-    } else {
-      const datosRutas = localStorage.getItem('RutasHabiles');
-      if (datosRutas !== undefined && datosRutas != null) {
-        this.rutas = JSON.parse(datosRutas);
-      }
-    }
-    this.cargando = false;
+    this.obtenerRutas();    
   },
   data() {
     return {
@@ -189,7 +179,16 @@ export default {
       }
     },
     async obtenerRutas() {
-      this.fetchRutas("");
+      this.cargando = true;
+      if (this.conectado) {
+        this.fetchRutas("");
+      } else {
+        const datosRutas = localStorage.getItem('RutasHabiles');
+        if (datosRutas !== undefined && datosRutas != null) {
+          this.rutas = JSON.parse(datosRutas);
+        }
+      }
+      this.cargando = false;
     },
 
     filtrarRutas(rutas) {

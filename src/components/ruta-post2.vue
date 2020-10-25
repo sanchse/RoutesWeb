@@ -8,9 +8,9 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex flex-column align-items-start">
         <h2>{{ editMode ? "Modificar " : "Crear " }} Ruta</h2>
-        <span class="text-muted"
+        <!-- <span class="text-muted"
           >{{ editMode ? "Actualizar " : "Añadir nuevo " }} registro</span
-        >
+        > -->
       </div>
     </div>
 
@@ -87,6 +87,17 @@
           ></b-form-input>
         </b-form-group>
 
+        <b-form-group id="input-group-6" label="Número de bultos" label-for="input-numero-bultos">
+          <b-form-input
+            id="input-numero-bultos"
+            type="number"
+            min="0"
+            max="9999"
+            v-model="model.numeroBultos"
+            placeholder="Número de bultos"
+          ></b-form-input>
+        </b-form-group>
+
         <b-form-group
           id="input-group-4"
           label="Litros"
@@ -115,18 +126,7 @@
             v-model="model.temperatura"
             placeholder="Temperatura de la mercancia"
           ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-6" label="Peso" label-for="input-peso">
-          <b-form-input
-            id="input-peso"
-            type="number"
-            min="0"
-            max="35000"
-            v-model="model.peso"
-            placeholder="Peso de la mercancia"
-          ></b-form-input>
-        </b-form-group>
+        </b-form-group>        
 
         <b-form-group
           id="input-group-7"

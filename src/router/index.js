@@ -31,6 +31,7 @@ export const routes = [
     { path: '/mercancia-post/:id?', component: MercanciaPost},
     { path: '/rutas', component: Rutas}, 
     { path: '/ruta-detalle/:id', component: RutaDetalle},
+    { path: '/ruta-detalle/:id/from/:from', component: RutaDetalle},
     { path: '/ruta-post/:id?', component: RutaPost },
     // { path: '*', redirect: '/'},
 ]

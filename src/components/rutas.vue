@@ -45,24 +45,27 @@
             
             <td :id="'btn_' + ruta.id">
               <div class="button-group" style="display: inline-block">
+                <router-link :to="`/ruta-detalle/${ruta.id}/from/rutas`" title="Ver" class="">
+                  <md-icon>visibility</md-icon>
+                </router-link>
+
+              <!-- class="btn btn-secondary a-btn-slide-text" -->
                 <router-link
                   :to="`/ruta-post/${ruta.id}`"
-                  class="btn btn-secondary a-btn-slide-text"
-                  >Editar</router-link
-                >
+                  class=""
+                  title="Editar"
+                  >
+                    <md-icon>edit</md-icon>
+                  </router-link>
 
+                <!-- class="btn btn-primary a-btn-slide-text" -->
                 <a
                   href="#"
                   @click="confirmDelete(ruta.id)"
-                  class="btn btn-primary a-btn-slide-text"
+                  class=""
+                  title="Eliminar"
                 >
-                  <span
-                    class="glyphicon glyphicon-remove"
-                    aria-hidden="true"
-                  ></span>
-                  <span>
-                    <strong>Borrar</strong>
-                  </span>
+                  <md-icon>delete</md-icon>
                 </a>
               </div>
             </td>
