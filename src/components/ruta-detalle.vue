@@ -343,19 +343,26 @@
             <div class="dato">
               <span>{{ ruta.destinatario.codPostal }}</span>
             </div>
-          </div>
+          </div>          
+        </md-card-content>
 
+        
+      </md-card>
+
+      <md-card>
+        <md-card-content>
           <div class="wrapper">
-            <div>
-              <label for="observacionesdestinatario"
-                >Observaciones del cargador</label
-              >
+            <div style="background-color: white;">
+              <p>
+                Firma del cargador
+              </p>
+              <!-- <img src="../assets/images/Firma.png" alt="Firma del cargador"> -->
             </div>
-          </div>
-
-          <div class="wrapper">
-            <div class="dato" style="height: 100px">
-              <span>{{ ruta.destinatario.observaciones }}</span>
+            <div style="background-color: white;">
+              <p>
+                Firma del transportista
+              </p>
+              <!-- <img src="../assets/images/Sello.png" alt="Firma del transportista"> -->
             </div>
           </div>
         </md-card-content>
@@ -373,7 +380,32 @@ export default {
   data() {
     return {
       rutaId: null,
-      ruta: {},
+      ruta: {
+        cliente: {
+          nombre: "",
+          nif: "",
+          
+        },
+        transportista:  {
+          nombre: "",
+          nif: "",
+          
+        },
+        destinatario: {
+          nombre: "",
+          nif: "",
+          
+        },
+        mercancia: {
+          nombre: '',
+        },
+        vehiculo: {
+          matricula: '',
+        },
+        remolque: {
+          matricula: '',
+        },
+      },
       provincias: provinciasFile.provincias,
     };
   },
@@ -383,7 +415,7 @@ export default {
       this.getRuta(this.$route.params.id);
     }
   },
-  methods: {
+  methods: {    
     getRuta(id) {
       const vm = this;
       rutasService.getRuta(id).then((result) => {
@@ -391,6 +423,9 @@ export default {
       });
     },
     provinciaString(id) {
+      if (id === undefined || id === null) {
+        return '';
+      }
       const provincia = this.provincias.filter(function (data) {
         return data.id == id;
       });

@@ -88,7 +88,7 @@
           class="float-right"
           :title="[conectado ? 'Conectado' : 'Sin coneción']"
         >
-          <md-icon style="color: white" v-bind:class="[conectado ? 'conectado' : 'noconectado']">{{
+          <md-icon v-if="isHomePath()" style="color: white" v-bind:class="[conectado ? 'conectado' : 'noconectado']">{{
             conectado ? "phonelink_ring" : "phonelink_erase"
           }}</md-icon>
         </div>
@@ -106,6 +106,7 @@ import babelPolyfill from "babel-polyfill";
 import { authService } from "./services/auth.service";
 import { healthService } from './services/health.service';
 //import "bootstrap/dist/css/bootstrap.css";
+import config from './config/config.js';
 
 
 export default {
@@ -119,19 +120,22 @@ export default {
   mounted() {
     this.obtenerToken();
   },
-  methods: {     
+  methods: {    
+    isHomePath() {      
+      return this.$route.path === '/';
+    }, 
     connectionChangeHandler(value) {
       console.log('Evento capturado: ' + value);
       this.conectado = value;
     },
     obtenerToken() {
       authService.signout();
-      authService.signin("admin", "12345aA$");
+      authService.signin(config.API_USER, config.API_SECRET);
     },
     renoveToken() {
       console.log("renove token");
       authService.signout();
-      authService.signin("admin", "12345aA$");
+      authService.signin(config.API_USER, config.API_SECRET);
     },
     hasToken() {
       const token = localStorage.getItem("accessToken");

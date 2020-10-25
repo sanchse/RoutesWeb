@@ -18,7 +18,6 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import PortalVue from 'portal-vue'
 
-
 Vue.use(VueMaterial)
 
 const toastOpotions = {

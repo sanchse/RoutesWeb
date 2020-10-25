@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from './config/config.js';
 
 export default class BaseHttpService {
 
@@ -7,7 +8,7 @@ export default class BaseHttpService {
   // }
 
   constructor() {
-    this.BASE_URL = 'http://localhost:3000';
+    this.BASE_URL = config.API_URL;
     this._accessToken = null;
   }
 
