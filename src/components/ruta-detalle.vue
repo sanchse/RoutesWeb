@@ -80,7 +80,7 @@
 
             <div class="wrapper">
               <div class="dato" style="height: 100px">
-                <span>{{ ruta.cliente.observaciones }}</span>
+                <span>{{ ruta.observacionesCargador }}</span>
               </div>
             </div>
           </md-card-content>
@@ -146,7 +146,7 @@
           </div>
           <div class="wrapper">
             <div class="dato" style="height: 100px">
-              <span>{{ ruta.transportista.observaciones }}</span>
+              <span>{{ ruta.observacionesTransportista }}</span>
             </div>
           </div>
         </md-card-content>
@@ -418,6 +418,18 @@ export default {
   methods: {    
     getRuta(id) {
       const vm = this;
+
+      //Obtenemos el dato del LocalStorage
+      var rutasStr = localStorage.getItem('RutasHabiles');
+      if (rutasStr !== undefined && rutasStr !== null) {        
+        var rutas = JSON.parse(rutasStr);        
+        var ruta = rutas.find(ruta => ruta.id === id*1);
+        
+        if (ruta !== undefined) {          
+          vm.ruta = ruta;          
+        }
+      }
+
       rutasService.getRuta(id).then((result) => {
         vm.ruta = result.data;
       });

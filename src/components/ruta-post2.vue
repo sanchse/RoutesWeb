@@ -154,6 +154,23 @@
         </b-form-group>
 
         <b-form-group
+            id="input-group-observaciones-cliente"
+            label="Observaciones del cargador"
+            label-for="observaciones-cargador"
+            class="required"
+        >
+          <b-form-textarea
+            id="observaciones-cargador"
+            v-model="model.observacionesCargador"
+            placeholeder="Observaciones..."
+            rows="3"
+            no-resize
+          >
+          </b-form-textarea>
+        </b-form-group>
+
+        
+        <b-form-group
           id="input-group-destinatario"
           label="Destinatario"
           label-for="input-destinatario"
@@ -173,6 +190,22 @@
           <b-form-select v-model="model.transportistaId" :options="transportistas" required>
             <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
           </b-form-select>
+        </b-form-group>
+
+        <b-form-group
+            id="input-group-observaciones-transportista"
+            label="Observaciones del transportista"
+            label-for="observaciones-transportista"
+            class="required"
+        >
+          <b-form-textarea
+            id="observaciones-transportista"
+            v-model="model.observacionesTransportista"
+            placeholeder="Observaciones..."
+            rows="3"
+            no-resize
+          >
+          </b-form-textarea>
         </b-form-group>
 
         <b-form-group
@@ -321,7 +354,8 @@ export default {
       destinatariosService
         .fetchDestinatarios({})
         .then(function (destinatarios) {
-          const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          //const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          const notSelectedItem = [];
           const mapDestinatarios = destinatarios.data.map(
             ({ id, nif, nombre }) => {
               return { value: id, text: nombre };
@@ -336,7 +370,8 @@ export default {
       transportistasService
         .fetchTransportistas({})
         .then(function (transportistas) {
-          const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          //const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          const notSelectedItem = [];
           const mapTransportistas = transportistas.data.map(
             ({ id, nif, nombre }) => {
               return { value: id, text: nombre };
@@ -351,7 +386,8 @@ export default {
       vehiculosService
         .fetchVehiculos({})
         .then(function (vehiculos) {
-          const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          //const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          const notSelectedItem = [];
           const mapVehiculos = vehiculos.data.map(({ id, nif, nombre }) => {
             return { value: id, text: nombre };
           });
@@ -364,7 +400,8 @@ export default {
       remolquesService
         .fetchRemolques({})
         .then(function (remolques) {
-          const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          //const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          const notSelectedItem = [];
           const mapRemolques = remolques.data.map(({ id, nif, nombre }) => {
             return { value: id, text: nombre };
           });
@@ -377,7 +414,8 @@ export default {
       mercanciasService
         .fetchMercancias({})
         .then(function (mercancias) {
-          const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          //const notSelectedItem = [{ value: null, text: "Sin seleccionar" }];
+          const notSelectedItem = [];
           const mapMercancias = mercancias.data.map(({ id, nif, nombre }) => {
             return { value: id, text: nombre };
           });
@@ -488,6 +526,8 @@ export default {
           vehiculoId,
           remolqueId,
           mercanciaId,
+          observacionesCargador = "",
+          observacionesTransportista = "",
         } = this.model;
 
         let ruta = null;
