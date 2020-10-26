@@ -76,12 +76,16 @@ export default {
             remolque = await remolquesService.updateRemolque(
                 this.remolqueId,
                 nombre,
-                observaciones
+                matricula,
+                nombre,
+                modelo
             );
         } else {
             remolque = await remolquesService.createRemolque(
             nombre,
-            observaciones
+            matricula,
+            nombre,
+            modelo
             );
         }
         console.info("Datos remolque: ", remolque);
