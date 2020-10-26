@@ -205,7 +205,7 @@ export default {
 
       if (statusCode !== 401) {
         console.log(error);
-        alert(error.message);
+        //alert(error.message);
       } else {
         console.error("error 401");
         this.$emit("renove-token");
