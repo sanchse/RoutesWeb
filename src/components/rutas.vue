@@ -149,11 +149,12 @@ export default {
     },
     eliminarRuta() {
       try {
+        console.log('Borrado del elemento: ' + this.selectedRutaId);
         rutasService.deleteRuta(this.selectedRutaId);
         this.$refs["my-modal"].toggle(`#btn_${this.selectedRutaId}`);
         this.selectedRutaId = null;
         this.confirmModal = false;
-        this.$toast.success("Ruta eliminado");
+        this.$toast.success("Ruta eliminada");
         setTimeout(() => this.obtenerRutas(), 1000);
       } catch (error) {
         this.error = true;
