@@ -149,7 +149,7 @@ export default {
         setTimeout(() => this.obtenerRutas(), 1000);
       } catch (error) {
         this.error = true;
-        this.$toast.error("No se pudo eliminar el ruta");
+        this.$toast.error("No se pudo eliminar la ruta");
         this.handleError(e);
       }
     },

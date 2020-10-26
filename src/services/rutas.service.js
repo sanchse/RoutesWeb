@@ -47,7 +47,7 @@ export default class RutasService extends BaseHttpService {
     return this.get(`rutas/${id}`);
   }
 
-  async deleteCliente(id) {
+  async deleteRuta(id) {
     await this.delete(`rutas/${id}`);
   }
 
