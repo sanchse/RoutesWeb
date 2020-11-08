@@ -2,7 +2,9 @@
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#">RUTAS</a>
+        <a class="navbar-brand" href="#">
+          <img src="./assets/icons/apple-icon-57x57.png" alt="logo" />
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -21,7 +23,7 @@
               exact
               active-class="active"
               class="nav-item"
-              tag="li"              
+              tag="li"
             >
               <a class="nav-link">Inicio</a>
             </router-link>
@@ -88,15 +90,21 @@
           class="float-right"
           :title="[conectado ? 'Conectado' : 'Sin coneción']"
         >
-          <md-icon v-if="isHomePath()" style="color: white" v-bind:class="[conectado ? 'conectado' : 'noconectado']">{{
-            conectado ? "phonelink_ring" : "phonelink_erase"
-          }}</md-icon>
+          <md-icon
+            v-if="isHomePath()"
+            style="color: white"
+            v-bind:class="[conectado ? 'conectado' : 'noconectado']"
+            >{{ conectado ? "phonelink_ring" : "phonelink_erase" }}</md-icon
+          >
         </div>
       </div>
     </nav>
     <div class="container my-5">
       <hr />
-      <router-view @renove-token="renoveToken" @connectionChange="connectionChangeHandler"></router-view>
+      <router-view
+        @renove-token="renoveToken"
+        @connectionChange="connectionChangeHandler"
+      ></router-view>
     </div>
   </div>
 </template>
@@ -104,10 +112,9 @@
 <script>
 import babelPolyfill from "babel-polyfill";
 import { authService } from "./services/auth.service";
-import { healthService } from './services/health.service';
+import { healthService } from "./services/health.service";
 //import "bootstrap/dist/css/bootstrap.css";
-import config from './config/config.js';
-
+import config from "./config/config.js";
 
 export default {
   data() {
@@ -120,12 +127,12 @@ export default {
   mounted() {
     this.obtenerToken();
   },
-  methods: {    
-    isHomePath() {      
-      return this.$route.path === '/';
-    }, 
+  methods: {
+    isHomePath() {
+      return this.$route.path === "/";
+    },
     connectionChangeHandler(value) {
-      console.log('Evento capturado: ' + value);
+      console.log("Evento capturado: " + value);
       this.conectado = value;
     },
     obtenerToken() {
@@ -146,7 +153,6 @@ export default {
     conectadoStr() {
       this.conectado ? "Conectado" : "Sin conexión";
     },
-    
   },
 };
 </script>
@@ -172,8 +178,8 @@ body {
   background-color: #d3d3d3;
 }
 .btn-primary {
-    background-color: #ffffff;
-  }
+  background-color: #ffffff;
+}
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -181,7 +187,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
 }
 
 .vue-form-generator > div {
