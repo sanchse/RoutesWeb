@@ -148,8 +148,7 @@ export default {
       this.$refs["my-modal"].hide();
     },
     eliminarRuta() {
-      try {
-        console.log('Borrado del elemento: ' + this.selectedRutaId);
+      try {        
         rutasService.deleteRuta(this.selectedRutaId);
         this.$refs["my-modal"].toggle(`#btn_${this.selectedRutaId}`);
         this.selectedRutaId = null;
