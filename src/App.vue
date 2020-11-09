@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="./assets/icons/apple-icon-57x57.png" alt="logo" />
+          <img src="./assets/RoutesLogo3-72x72.png" alt="logo" />
         </a>
         <button
           class="navbar-toggler"
