@@ -24,6 +24,12 @@ export default class BaseHttpService {
       .catch(error => this._handleHttpError(error));
   }
 
+  async put(endpoint, data = {}, options = {}) {
+    Object.assign(options, this._getCommonOptions());
+    return axios.put(`${this.BASE_URL}/${endpoint}`, data, options)
+      .catch(error => this._handleHttpError(error));
+  }
+
   async delete(endpoint, options = {}) {
     Object.assign(options, this._getCommonOptions());
     return axios.delete(`${this.BASE_URL}/${endpoint}`, options)

@@ -135,7 +135,6 @@ export default {
       }
     },
     async search() {
-      console.log('buscando...');
       this.fetchTransportistas(this.buscar);
     },
     async fetchTransportistas(searchText) {

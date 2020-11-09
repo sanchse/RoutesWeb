@@ -23,6 +23,7 @@
     "vue-form-generator": "^2.3.4",
     "vue-material": "^1.0.0-beta-15",
     "vue-router": "^3.4.3",
+    "vue-signature-pad": "^2.0.2",
     "vue-toastification": "^1.7.8"
   },
   "browserslist": [

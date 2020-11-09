@@ -157,7 +157,7 @@
             id="input-group-observaciones-cliente"
             label="Observaciones del cargador"
             label-for="observaciones-cargador"
-            class="required"
+            class=""
         >
           <b-form-textarea
             id="observaciones-cargador"
@@ -196,7 +196,7 @@
             id="input-group-observaciones-transportista"
             label="Observaciones del transportista"
             label-for="observaciones-transportista"
-            class="required"
+            class=""
         >
           <b-form-textarea
             id="observaciones-transportista"
@@ -316,6 +316,7 @@ export default {
         vehiculoId: "",
         remolqueId: "",
         mercanciaId: "",
+        finalizado: 0,
         //fechaEnvio: new Date().valueOf(),
       },
       // schema: rutaFormSchema,
@@ -498,6 +499,8 @@ export default {
         vehiculoId,
         remolqueId,
         mercanciaId,
+        finalizado,
+        firmaDataUrl,
       } = ruta.data;
 
       this.model = ruta.data;
@@ -528,6 +531,7 @@ export default {
           mercanciaId,
           observacionesCargador = "",
           observacionesTransportista = "",
+          finalizado = 0,
         } = this.model;
 
         let ruta = null;
@@ -578,6 +582,7 @@ export default {
           this.$router.push("/rutas");
         }, 1500);
       } catch (error) {
+        console.log(error);
         this.error = true;
         this.isSaving = false;
         const msg = this.editMode

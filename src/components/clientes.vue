@@ -135,7 +135,6 @@ export default {
       }
     },
     async search() {
-      console.log('buscando...');
       this.fetchClientes(this.buscar);
     },
     async fetchClientes(searchText) {

@@ -57,7 +57,6 @@ export default {
   methods: {
     async loadModel() {
         const mercancia = await mercanciasService.getMercancia(this.mercanciaId);
-        console.log('mercancia', mercancia),
         this.model = mercancia.data;
     },
     async submitMercanciaData() {

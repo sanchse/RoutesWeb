@@ -154,7 +154,6 @@ export default {
       }
     },
     async search() {
-      console.log("buscando...");
       this.fetchRutas(this.buscar);
     },
     async fetchRutas(searchText) {

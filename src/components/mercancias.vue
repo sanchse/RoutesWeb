@@ -117,7 +117,6 @@ export default {
       }
     },
     async search() {
-      console.log('buscando...');
       this.fetchMercancias(this.buscar);
     },
     async fetchMercancias(searchText) {

@@ -5,7 +5,9 @@
         >Volver</router-link
       > -->
 
-      <a @click="$router.go(-1)" class="btn btn-sm btn-outline-secondary">Volver</a>
+      <a @click="$router.go(-1)" class="btn btn-sm btn-outline-secondary"
+        >Volver</a
+      >
     </div>
 
     <div style="display: inline-block">
@@ -233,7 +235,6 @@
             <div class="dato">
               <span>{{ ruta.temperatura }}</span>
             </div>
-            
           </div>
           <div class="wrapper">
             <div>
@@ -242,8 +243,6 @@
               </md-checkbox>
             </div>
           </div>
-
-
         </md-card-content>
       </md-card>
 
@@ -345,26 +344,65 @@
             <div class="dato">
               <span>{{ ruta.destinatario.codPostal }}</span>
             </div>
-          </div>          
+          </div>
         </md-card-content>
-
-        
       </md-card>
 
       <md-card>
         <md-card-content>
           <div class="wrapper">
-            <div style="background-color: white;">
-              <p>
-                Firma del cargador
-              </p>
+            <div style="background-color: white">
+              <p>Firma del cargador</p>
               <!-- <img src="../assets/images/Firma.png" alt="Firma del cargador"> -->
+
+              <div>
+                <div
+                  class="col-md-12"
+                  v-if="ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''"
+                >
+                  <VueSignaturePad
+                    id="signature"
+                    width="300px"
+                    height="200px"
+                    ref="signaturePad"
+                    :options="this.signatureOptions"
+                  />
+                </div>
+                <div v-if="ruta.firmaDataUrl !== null && ruta.firmaDataUrl !== ''">
+                  <img :src="ruta.firmaDataUrl" alt="Firma" width="300px" height="200px" />
+                </div>
+                <div
+                  class="row"
+                  v-if="ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''"
+                >
+                  <div class="col-md-6">
+                    <button class="btn btn-outline-primary" @click="saveSign">
+                      Firmar
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-outline-primary" @click="clearSign">
+                      Borrar
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style="background-color: white;">
-              <p>
-                Firma del transportista
-              </p>
-              <!-- <img src="../assets/images/Sello.png" alt="Firma del transportista"> -->
+            <div style="background-color: white">
+              <p>Firma del transportista</p>
+              <img
+                src="../assets/images/sello-500x300.png"
+                alt="Firma del transportista"
+                sizes="(max-width: 165px) 150px,
+                         (max-width: 330px) 300px,
+                         500px"
+                srcset="
+                  ../assets/images/sello-165x99.png  165w,
+                  ../assets/images/sello-330x198.png,
+                  330w,
+                  ../assets/images/sello-500x300.png 500w
+                "
+              />
             </div>
           </div>
         </md-card-content>
@@ -381,33 +419,36 @@ import provinciasFile from "../assets/provincias.json";
 export default {
   data() {
     return {
+      signatureOptions: {
+        penColor: "#000000",
+      },
       rutaId: null,
-      from: 'home',
+      from: "home",
       ruta: {
         cliente: {
           nombre: "",
           nif: "",
-          
         },
-        transportista:  {
+        transportista: {
           nombre: "",
           nif: "",
-          
         },
         destinatario: {
           nombre: "",
           nif: "",
-          
         },
         mercancia: {
-          nombre: '',
+          nombre: "",
         },
         vehiculo: {
-          matricula: '',
+          matricula: "",
         },
         remolque: {
-          matricula: '',
+          matricula: "",
         },
+        firma: null,
+        firmaDataUrl: null,
+        finalizado: false,
       },
       provincias: provinciasFile.provincias,
     };
@@ -421,7 +462,7 @@ export default {
     if (this.$route.params.from !== undefined) {
       this.from = this.$route.params.from;
     }
-  },  
+  },
   watch: {
     $route(to) {
       this.rutaId = to.params.id;
@@ -430,30 +471,71 @@ export default {
     },
   },
   methods: {
+    saveSign() {
+      const vm = this;
+      const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
+
+      if (!isEmpty) {
+        let result = rutasService.signRuta(this.rutaId, data);
+        vm.ruta.firmaDataUrl = data;
+
+        this.saveRutaToLocalStorage();
+      }
+
+    },
+    clearSign() {
+      this.$refs.signaturePad.undoSignature();
+      this.$refs.signaturePad.clearSignature();
+    },
     comingFromHome() {
-      return this.from.toLowerCase() === 'home'; 
-    },   
+      return this.from.toLowerCase() === "home";
+    },
+    saveRutaToLocalStorage() {      
+      var rutasStr = localStorage.getItem("RutasHabiles");
+      if (rutasStr !== undefined && rutasStr !== null) {
+        var rutas = JSON.parse(rutasStr);
+
+        var ruta = rutas.find((ruta) => ruta.id === this.rutaId * 1);
+        if (ruta !== undefined) {
+          ruta.firmaDataUrl = this.ruta.firmaDataUrl;
+          localStorage.setItem("RutasHabile", JSON.stringify(rutas));
+        }
+      }
+    },
     getRuta(id) {
       const vm = this;
 
       //Obtenemos el dato del LocalStorage
-      var rutasStr = localStorage.getItem('RutasHabiles');
-      if (rutasStr !== undefined && rutasStr !== null) {        
-        var rutas = JSON.parse(rutasStr);        
-        var ruta = rutas.find(ruta => ruta.id === id*1);
-        
-        if (ruta !== undefined) {          
+      var rutasStr = localStorage.getItem("RutasHabiles");
+      if (rutasStr !== undefined && rutasStr !== null) {
+        var rutas = JSON.parse(rutasStr);
+        var ruta = rutas.find((ruta) => ruta.id === id * 1);
+
+        if (ruta !== undefined) {
           vm.ruta = ruta;          
         }
       }
 
       rutasService.getRuta(id).then((result) => {
         vm.ruta = result.data;
+
+        if (
+          vm.ruta &&
+          vm.ruta.firmaDataUrl !== null &&
+          vm.ruta.firmaDataUrl !== ""
+        ) {
+          //this.$refs.signaturePad.fromDataURL(vm.ruta.firmaDataUrl);
+          // const b64Image = Buffer.from(vm.ruta.firma).toString("base64");
+          // this.$refs.signaturePad.fromDataURL(
+          //   "data:image/png;base64," + b64Image
+          // );
+          console.log("imagen cargada ...");
+        }
       });
     },
     provinciaString(id) {
       if (id === undefined || id === null) {
-        return '';
+        return "";
       }
       const provincia = this.provincias.filter(function (data) {
         return data.id == id;

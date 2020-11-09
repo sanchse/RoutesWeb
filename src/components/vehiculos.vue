@@ -128,7 +128,6 @@ export default {
       }
     },
     async search() {
-      console.log('buscando...');
       this.fetchVehiculos(this.buscar);
     },
     async fetchVehiculos(searchText) {

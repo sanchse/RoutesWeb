@@ -17,7 +17,9 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import PortalVue from 'portal-vue'
+import VueSignature from "vue-signature-pad";
 
+Vue.use(VueSignature);
 Vue.use(VueMaterial)
 
 const toastOpotions = {

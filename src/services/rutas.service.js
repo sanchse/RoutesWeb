@@ -5,31 +5,31 @@ export default class RutasService extends BaseHttpService {
   fetchRutas({ fechaDesde, fechaHasta, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, search }) {
     const queryObj = {};
 
-    if (this.isInitialize(fechaDesde)) {
+    if (this.isInitialized(fechaDesde)) {
       queryObj.fechaDesde = fechaDesde;
     }
-    if (this.isInitialize(fechaHasta)) {
+    if (this.isInitialized(fechaHasta)) {
       queryObj.fechaHasta = fechaHasta;
     }
-    if (this.isInitialize(clienteId)) {
+    if (this.isInitialized(clienteId)) {
       queryObj.clienteId = clienteId;
     }
-    if (this.isInitialize(transportistaId)) {
+    if (this.isInitialized(transportistaId)) {
       queryObj.transportistaId = transportistaId;
     }
-    if (this.isInitialize(destinatarioId)) {
+    if (this.isInitialized(destinatarioId)) {
       queryObj.destinatarioId = destinatarioId;
     }
-    if (this.isInitialize(vehiculoId)) {
+    if (this.isInitialized(vehiculoId)) {
       queryObj.vehiculoId = vehiculoId;
     }
-    if (this.isInitialize(remolqueId)) {
+    if (this.isInitialized(remolqueId)) {
       queryObj.remolqueId = remolqueId;
     }
-    if (this.isInitialize(mercanciaId)) {
+    if (this.isInitialized(mercanciaId)) {
       queryObj.mercanciaId = mercanciaId;
     }
-    if (this.isInitialize(search)) {
+    if (this.isInitialized(search)) {
       queryObj.search = search;
     }
 
@@ -39,7 +39,7 @@ export default class RutasService extends BaseHttpService {
     return response;
   }
 
-  isInitialize(obj) {
+  isInitialized(obj) {
     return obj !== undefined && obj !== null && obj.length;
   }
 
@@ -52,11 +52,19 @@ export default class RutasService extends BaseHttpService {
   }
 
   updateRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
-    return this.patch(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
+    return this.put(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
   }
 
   createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
     return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
+  }
+
+  finalizeRuta(id) {
+    return this.patch(`rutas/${id}/status`);
+  }
+
+  signRuta(id, firma) {
+    return this.patch(`rutas/${id}`, { firma });
   }
 }
 
