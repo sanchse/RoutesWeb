@@ -139,7 +139,6 @@ export default {
     },
     async fetchClientes(searchText) {
       try {
-        console.info("Obteniendo clientes...");
         this.cargando = true;
         this.clientes = [];
         const datos = await clientesService.fetchClientes({

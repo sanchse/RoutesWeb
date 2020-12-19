@@ -139,7 +139,6 @@ export default {
     },
     async fetchTransportistas(searchText) {
       try {
-        console.info("Obteniendo transportistas...");
         this.cargando = true;
         this.transportistas = [];
         const datos = await transportistasService.fetchTransportistas({

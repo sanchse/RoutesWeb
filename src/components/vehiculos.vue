@@ -132,7 +132,6 @@ export default {
     },
     async fetchVehiculos(searchText) {
       try {
-        console.info("Obteniendo vehiculos...");
         this.cargando = true;
         this.vehiculos = [];
         const datos = await vehiculosService.fetchVehiculos({

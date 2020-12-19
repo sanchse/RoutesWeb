@@ -168,7 +168,6 @@ export default {
       try {
           this.cargando = true;
         this.rutas = [];
-        console.info("Obteniendo rutas...");
         const datos = await rutasService.fetchRutas({
           fechaDesde: null,
           fechaHasta: null,

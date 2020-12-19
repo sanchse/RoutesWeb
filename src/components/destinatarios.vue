@@ -139,7 +139,6 @@ export default {
     },
     async fetchDestinatarios(searchText) {
       try {
-        console.info("Obteniendo destinatarios...");
         this.cargando = true;
         this.destinatarios = [];
         const datos = await destinatariosService.fetchDestinatarios({

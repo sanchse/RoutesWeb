@@ -132,7 +132,6 @@ export default {
     },
     async fetchRemolques(searchText) {
       try {
-        console.info("Obteniendo remolques...");
         this.cargando = true;
         this.remolques = [];
         const datos = await remolquesService.fetchRemolques({

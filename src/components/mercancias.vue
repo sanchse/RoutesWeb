@@ -121,7 +121,6 @@ export default {
     },
     async fetchMercancias(searchText) {
       try {
-        console.info("Obteniendo mercancias...");
         this.cargando = true;
         this.mercancias = [];
         const datos = await mercanciasService.fetchMercancias({
