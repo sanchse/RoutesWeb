@@ -35,12 +35,22 @@
             >
               <a class="nav-link">Rutas</a>
             </router-link>
+
+            <router-link
+              to="/conductores"
+              active-class="active"
+              class="nav-item"
+              tag="li"
+            >            
+              <a class="nav-link">Conductores</a>
+            </router-link>
+
             <router-link
               to="/clientes"
               active-class="active"
               class="nav-item"
               tag="li"
-            >
+            >            
               <a class="nav-link">Clientes</a>
             </router-link>
             <router-link

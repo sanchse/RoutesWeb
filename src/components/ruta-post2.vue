@@ -142,6 +142,17 @@
           </div>
           <div class="col-6">
             
+        <b-form-group v-show="!conductorIdParam"
+          id="input-group-conductor"
+          label="Conductor"
+          label-for="input-conductor"  
+          class="required"        
+        >
+          <b-form-select v-model="model.conductorId" :options="conductores" required>
+            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+          </b-form-select>
+        </b-form-group>
+
         <b-form-group
           id="input-group-cliente"
           label="Cliente"
@@ -262,6 +273,7 @@
 //import rutaFormSchema from "../forms/rutaFormSchema";
 import babelPolyfill from "babel-polyfill";
 import moment from "moment";
+import { conductoresService } from "../services/conductores.service";
 import { clientesService } from "../services/clientes.service";
 import { destinatariosService } from "../services/destinatarios.service";
 import { transportistasService } from "../services/transportistas.service";
@@ -295,6 +307,7 @@ export default {
           },
         },
       },
+      conductores: [],
       clientes: [],
       transportistas: [],
       destinatarios: [],
@@ -310,6 +323,7 @@ export default {
         temperatura: null,
         muestra: false,
         fechaEnvio: new Date().toISOString(),
+        conductorId: "",
         clienteId: "",
         destinatarioId: "",
         transportistaId: "",
@@ -318,15 +332,11 @@ export default {
         mercanciaId: "",
         finalizado: 0,
         //fechaEnvio: new Date().valueOf(),
-      },
-      // schema: rutaFormSchema,
-      // formOptions: {
-      //   validateAfterLoad: false,
-      //   validateAfterChanged: true
-      // },
+      },      
       isSaving: false,
       error: false,
       rutaId: null,
+      conductorIdParam: false,
     };
   },
   watch: {
@@ -338,6 +348,24 @@ export default {
   created() {},
   beforeRouteEnter(to, from, next) {
     next((vm) => {
+      conductoresService
+        .fetchConductores({})
+        .then(function (conductores) {
+          const notSelectedItem = [];
+          const mapConductores = conductores.data.map(
+            ({ id, nif, nombre, apellido1, apellido2 }) => {
+              return {
+                value: id,
+                text: nombre + " " + apellido1 + " " + apellido2,
+              };
+            }
+          );
+          vm.conductores = notSelectedItem.concat(mapConductores);
+        })
+        .catch(function (error) {
+          vm.handleError(error);
+        });
+
       clientesService
         .fetchClientes({})
         .then(function (clientes) {
@@ -432,6 +460,10 @@ export default {
       this.rutaId = this.$route.params.id;
       this.loadModel();
     }
+    else if (this.$route.params.conductorId !== undefined) {
+      this.conductorIdParam = true;
+      this.model.conductorId = this.$route.params.conductorId;
+    }
   },
   methods: {
     checkForm: function (e) {
@@ -442,6 +474,10 @@ export default {
       }
       if (this.model.destino === undefined || !this.model.destino) {
         this.errors.push("El campo Destino es obligatorio.");
+      }
+
+      if (this.model.conductorId === undefined || !this.model.conductorId) {
+        this.errors.push("Debe seleccionar un Conductor.");
       }
 
       if (this.model.clienteId === undefined || !this.model.clienteId) {
@@ -493,6 +529,7 @@ export default {
         temperatura,
         numeroBultos,
         muestra,
+        conductorId,
         clienteId,
         transportistaId,
         destinatarioId,
@@ -504,6 +541,7 @@ export default {
       } = ruta.data;
 
       this.model = ruta.data;
+      this.model.conductor = conductorId;
       this.model.cliente = clienteId;
       this.model.destinatario = destinatarioId;
       this.model.transportista = transportistaId;
@@ -523,6 +561,7 @@ export default {
           temperatura = "",
           numeroBultos = null,
           muestra = null,
+          conductorId,
           clienteId,
           destinatarioId,
           transportistaId,
@@ -547,12 +586,15 @@ export default {
             muestra,
             temperatura,
             numeroBultos,
+            conductorId,
             clienteId,
             transportistaId,
             destinatarioId,
             vehiculoId,
             remolqueId,
-            mercanciaId
+            mercanciaId,
+            observacionesCargador,
+            observacionesTransportista
           );
         } else {
           ruta = await rutasService.createRuta(
@@ -564,12 +606,15 @@ export default {
             muestra,
             temperatura,
             numeroBultos,
+            conductorId,
             clienteId,
             transportistaId,
             destinatarioId,
             vehiculoId,
             remolqueId,
-            mercanciaId
+            mercanciaId,
+            observacionesCargador,
+            observacionesTransportista
           );
         }
         this.isSaving = false;
@@ -635,7 +680,7 @@ button {
 }
 
 .btn-primary {
-  color: #407AD9;
+  color: #407ad9;
 }
 .btn-primary:hover {
   color: white;

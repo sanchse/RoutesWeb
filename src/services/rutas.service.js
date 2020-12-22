@@ -51,12 +51,12 @@ export default class RutasService extends BaseHttpService {
     await this.delete(`rutas/${id}`);
   }
 
-  updateRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
-    return this.put(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
+  updateRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
+    return this.put(`rutas/${id}`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
   }
 
-  createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
-    return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
+  createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
+    return this.post(`rutas`, { fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
   }
 
   finalizeRuta(id) {

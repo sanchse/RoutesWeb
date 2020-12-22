@@ -73,6 +73,7 @@ export default {
         const {
           nif,
           nombre,
+          email = "",
           domicilio = "",
           localidad = "",
           provincia = "",
@@ -89,6 +90,7 @@ export default {
                 this.destinatarioId,
                 nombre,
                 nif, 
+                email,
                 domicilio,
                 localidad,
                 codProvincia, 
@@ -98,14 +100,15 @@ export default {
             );
         } else {
             destinatario = await destinatariosService.createDestinatario(
-            nif,
-            nombre,
-            domicilio,
-            localidad,
-            codProvincia,
-            pais,
-            codPostal,
-            observaciones
+              nombre,
+              nif,
+              email,
+              domicilio,
+              localidad,
+              codProvincia,
+              pais,
+              codPostal,
+              observaciones
             );
         }
         console.info("Datos destinatario: ", destinatario);

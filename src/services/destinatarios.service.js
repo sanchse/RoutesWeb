@@ -29,12 +29,12 @@ export default class DestinatariosService extends BaseHttpService {
     await this.delete(`destinatarios/${id}`);
   }
 
-  updateDestinatario(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.patch(`destinatarios/${id}`, { nombre, nif, domicilio, localidad, codProvincia, codPostal, observaciones });
+  updateDestinatario(id, nombre, nif, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    return this.patch(`destinatarios/${id}`, { nombre, nif, email, domicilio, localidad, codProvincia, codPostal, observaciones });
   }
 
-  createDestinatario(nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.post(`destinatarios`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
+  createDestinatario(nombre, nif, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    return this.post(`destinatarios`, { nif, nombre, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 
   isInitialize(obj) {

@@ -28,6 +28,17 @@ export default {
                 {
                     type: 'input',
                     inputType: 'text',
+                    label: 'Email',
+                    model: 'email',
+                    required: false,
+                    validator: ['email'],
+                    validator: VueFormGenerator.validators.email.locale({
+                        invalidEmail: "El email no es correcto",
+                    })
+                },
+                {
+                    type: 'input',
+                    inputType: 'text',
                     label: 'Domicilio',
                     model: 'domicilio',
                     required: false,

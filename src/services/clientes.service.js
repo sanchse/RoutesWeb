@@ -29,12 +29,12 @@ export default class ClientesService extends BaseHttpService {
     await this.delete(`clientes/${id}`);
   }
 
-  updateCliente(id, nombre, nif, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.patch(`clientes/${id}`, { nombre, nif, domicilio, localidad, codProvincia, codPostal, observaciones });
+  updateCliente(id, nombre, nif, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    return this.patch(`clientes/${id}`, { nombre, nif, email, domicilio, localidad, codProvincia, codPostal, observaciones });
   }
 
-  createCliente(nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
-    return this.post(`clientes`, { nif, nombre, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
+  createCliente(nif, nombre, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones) {
+    return this.post(`clientes`, { nif, nombre, email, domicilio, localidad, codProvincia, pais, codPostal, observaciones });
   }
 
   isInitialize(obj) {

@@ -1,4 +1,6 @@
 import Home from '../components/home.vue';
+import Conductores from '../components/conductores.vue';
+import ConductorPost from '../components/conductor-post.vue';
 import Clientes from '../components/clientes.vue';
 import ClientePost from '../components/cliente-post.vue';
 import Transportistas from '../components/transportistas.vue';
@@ -17,6 +19,8 @@ import RutaPost from '../components/ruta-post2.vue';
 
 export const routes = [
     { path: '/', component: Home },
+    { path: '/conductores', component: Conductores},
+    { path: '/conductor-post/:id?', component: ConductorPost },
     { path: '/clientes', component: Clientes }, 
     { path: '/cliente-post/:id?', component: ClientePost },
     { path: '/transportistas', component: Transportistas },
