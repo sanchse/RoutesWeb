@@ -2,7 +2,9 @@ import BaseHttpService from './base-http.service';
 import queryString from 'query-string';
 
 export default class RutasService extends BaseHttpService {
-  fetchRutas({ fechaDesde, fechaHasta, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, search }) {
+  fetchRutas(params) {
+    console.log('params: ', params);
+    const { fechaDesde, fechaHasta, finalizado, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, search } = params;
     const queryObj = {};
 
     if (this.isInitialized(fechaDesde)) {
@@ -10,6 +12,9 @@ export default class RutasService extends BaseHttpService {
     }
     if (this.isInitialized(fechaHasta)) {
       queryObj.fechaHasta = fechaHasta;
+    }
+    if (finalizado != undefined && finalizado != null) {
+      queryObj.finalizado = finalizado ? 1 : 0;
     }
     if (this.isInitialized(clienteId)) {
       queryObj.clienteId = clienteId;
@@ -33,7 +38,9 @@ export default class RutasService extends BaseHttpService {
       queryObj.search = search;
     }
 
+    console.log('queryObj: ', queryObj);
     const queryStr = queryString.stringify(queryObj);
+    console.log('queryString: ', queryStr);
     const response = this.get('rutas' + (queryStr ? `?${queryStr}` : ''));
 
     return response;

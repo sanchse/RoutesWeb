@@ -45,6 +45,15 @@
             
             <td :id="'btn_' + ruta.id">
               <div class="button-group" style="display: inline-block">
+                <a
+                  href="#"
+                  @click="confirmFinishRoute(ruta.id)"
+                  class=""
+                  title="Finalizar"
+                >
+                  <md-icon>done</md-icon>
+                </a>
+
                 <router-link :to="`/ruta-detalle/${ruta.id}/from/rutas`" title="Ver" class="">
                   <md-icon>visibility</md-icon>
                 </router-link>
@@ -66,7 +75,7 @@
                   title="Eliminar"
                 >
                   <md-icon>delete</md-icon>
-                </a>
+                </a>                
               </div>
             </td>
           </tr>
@@ -77,7 +86,7 @@
       </div>
     </div>
 
-    <b-modal ref="my-modal" hide-footer title="Borrar ruta" button-size="sm">
+    <b-modal ref="delete-modal" hide-footer title="Borrar ruta" button-size="sm">
       <div class="d-block text-center">
         <h5>¿Realmente desea eliminar este registro?</h5>
         <hr />
@@ -87,6 +96,21 @@
           >Cancelar</b-button
         >
         <b-button size="sm" variant="success" @click="eliminarRuta"
+          >Confirmar</b-button
+        >
+      </div>
+    </b-modal>
+
+    <b-modal ref="finish-modal" hide-footer title="Finalizar ruta" button-size="sm">
+      <div class="d-block text-center">
+        <h5>¿Realmente desea finalizar esta ruta?</h5>
+        <hr />
+      </div>
+      <div class="float-right">
+        <b-button size="sm" variant="danger" @click="cancelFinish"
+          >Cancelar</b-button
+        >
+        <b-button size="sm" variant="success" @click="finishRuta"
           >Confirmar</b-button
         >
       </div>
@@ -112,6 +136,7 @@ export default {
       cargando: true,
       error: false,
       confirmModal: false,
+      confirmFinishModal: false,
       selectedRutaId: null,
       provincias: provinciasFile.provincias,
       buscar: '',
@@ -136,21 +161,46 @@ export default {
 
       return provincia || provincia.length ? provincia[0].name : '';
     },
+    confirmFinishRoute(id) {
+      this.selectedRutaId = id;
+      this.confirmFinishModal = true;
+      this.$refs["finish-modal"].show();
+    },
+    cancelFinish() {
+      this.$toast.warning("Finalización cancelada");
+      this.selectedRutaId = null;
+      this.confirmFinishModal = false;
+      this.$refs["finish-modal"].hide();
+    },
+    finishRuta() {
+      try {        
+        rutasService.finalizeRuta(this.selectedRutaId);
+        this.$refs["finish-modal"].toggle(`#btn_${this.selectedRutaId}`);
+        this.selectedRutaId = null;
+        this.confirmFinishModal = false;
+        this.$toast.success("Ruta finalizada");
+        setTimeout(() => this.obtenerRutas(), 1000);
+      } catch (error) {
+        this.error = true;
+        this.$toast.error("No se pudo finalizar la ruta");
+        this.handleError(e);
+      }
+    },
     confirmDelete(id) {
       this.selectedRutaId = id;
       this.confirmModal = true;
-      this.$refs["my-modal"].show();
+      this.$refs["delete-modal"].show();
     },
     cancelDelete() {
       this.$toast.warning("Borrado cancelado");
       this.selectedRutaId = null;
       this.confirmModal = false;
-      this.$refs["my-modal"].hide();
+      this.$refs["delete-modal"].hide();
     },
     eliminarRuta() {
       try {        
         rutasService.deleteRuta(this.selectedRutaId);
-        this.$refs["my-modal"].toggle(`#btn_${this.selectedRutaId}`);
+        this.$refs["delete-modal"].toggle(`#btn_${this.selectedRutaId}`);
         this.selectedRutaId = null;
         this.confirmModal = false;
         this.$toast.success("Ruta eliminada");
@@ -171,11 +221,13 @@ export default {
         const datos = await rutasService.fetchRutas({
           fechaDesde: null,
           fechaHasta: null,
+          finalizado: this.filtrarRutas ? false : null,
           search: searchText,
         });
 
         if (datos) {
-          this.rutas = this.filtrarRutas ? this.filtrar(datos.data) : datos.data;
+          //this.rutas = this.filtrarRutas ? this.filtrar(datos.data) : datos.data;
+          this.rutas = datos.data;
           this.cargando = false;
         }
       } catch (e) {

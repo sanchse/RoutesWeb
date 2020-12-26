@@ -95,6 +95,7 @@ export default {
       selectedRutaId: null,
       provincias: provinciasFile.provincias,
       buscar: "",
+      soloNoFinalizados: true,
     };
   },
   watch: {
@@ -163,11 +164,13 @@ export default {
         const datos = await rutasService.fetchRutas({
           fechaDesde: null,
           fechaHasta: null,
+          finalizado: this.soloNoFinalizados ? false : null,
           search: searchText,
         });
 
         if (datos) {
-          this.rutas = this.filtrarRutas(datos.data);
+          //this.rutas = this.filtrarRutas(datos.data);
+          this.rutas = datos.data;
           localStorage.setItem('RutasHabiles', JSON.stringify(this.rutas));
           this.cargando = false;
         }
