@@ -19,6 +19,7 @@ import 'vue-material/dist/theme/default.css'
 import PortalVue from 'portal-vue'
 import VueSignature from "vue-signature-pad";
 
+
 Vue.use(VueSignature);
 Vue.use(VueMaterial)
 
@@ -57,13 +58,11 @@ Vue.use(ModalPlugin)
 import { CardPlugin } from 'bootstrap-vue'
 
 Vue.use(CardPlugin)
-
 Vue.use(Toast, toastOpotions);
 Vue.use(VueFormGenerator);
+Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
-
-Vue.use(VueRouter);
 
 //Filters
 Vue.filter('formatDate', function(value) {

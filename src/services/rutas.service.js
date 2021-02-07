@@ -3,7 +3,7 @@ import queryString from 'query-string';
 
 export default class RutasService extends BaseHttpService {
   fetchRutas(params) {
-    console.log('params: ', params);
+    //console.log('params: ', params);
     const { fechaDesde, fechaHasta, finalizado, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, search } = params;
     const queryObj = {};
 
@@ -38,9 +38,9 @@ export default class RutasService extends BaseHttpService {
       queryObj.search = search;
     }
 
-    console.log('queryObj: ', queryObj);
+    //console.log('queryObj: ', queryObj);
     const queryStr = queryString.stringify(queryObj);
-    console.log('queryString: ', queryStr);
+    //console.log('queryString: ', queryStr);
     const response = this.get('rutas' + (queryStr ? `?${queryStr}` : ''));
 
     return response;

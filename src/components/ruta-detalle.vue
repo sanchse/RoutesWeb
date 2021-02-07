@@ -10,403 +10,406 @@
       >
     </div>
 
-    <div style="display: inline-block">
-      <h5>
-        DOCUMENTO DE CONTROL ADMINISTRATIVO PARA LA REALIZACIÓN DE TRANSPORTE
-        PÚBLICO DE MERCANCÍAS POR CARRETERA
-      </h5>
-      <strong style=""
-        >(Orden FOM/2861/2012, BOE nº 5, de 5 de enero de 2013)</strong
-      >
-    </div>
-    <div class="container-fluid">
-      <md-content>
+    <div ref="pdfcontent">
+      <div style="display: inline-block">
+        <h5>
+          DOCUMENTO DE CONTROL ADMINISTRATIVO PARA LA REALIZACIÓN DE TRANSPORTE
+          PÚBLICO DE MERCANCÍAS POR CARRETERA
+        </h5>
+        <strong style=""
+          >(Orden FOM/2861/2012, BOE nº 5, de 5 de enero de 2013)</strong
+        >
+      </div>
+      <div class="container-fluid">
+        <md-content>
+          <md-card>
+            <md-card-header>
+              <div class="md-title">Datos del cargador contractual</div>
+              <span
+                >(cargador efectivo u otro operador que contrate el transporte o
+                intermidie en su contratación)</span
+              >
+            </md-card-header>
+            <md-card-content>
+              <div class="wrapper">
+                <div>
+                  <label for="nombrecliente"
+                    >Nombre o denominación social</label
+                  >
+                </div>
+                <div class="dato">
+                  <span class="" id="nombrecliente">{{
+                    ruta.cliente.nombre
+                  }}</span>
+                </div>
+              </div>
+              <div class="wrapper">
+                <div class="col-sm-4">
+                  <label for="nifcliente">NIF</label>
+                </div>
+                <div class="col-sm-4 dato">
+                  <span>{{ ruta.cliente.nif }}</span>
+                </div>
+                <div>
+                  <label for="provinciacliente">Provincia</label>
+                </div>
+                <div class="dato">
+                  <span>{{
+                    this.provinciaString(ruta.cliente.codProvincia)
+                  }}</span>
+                </div>
+              </div>
+              <div class="wrapper">
+                <div>
+                  <label for="codpostalcliente">Código postal</label>
+                </div>
+                <div class="dato">
+                  <span>{{ ruta.cliente.codPostal }}</span>
+                </div>
+                <div>
+                  <label for="localidadcliente">Poblacion</label>
+                </div>
+                <div class="dato">
+                  <span>{{ ruta.cliente.localidad }}</span>
+                </div>
+              </div>
+              <div class="wrapper">
+                <div>
+                  <label for="observacionescliente"
+                    >Observaciones del cargador</label
+                  >
+                </div>
+              </div>
+              <div class="wrapper">
+                <div class="dato" style="height: 100px">
+                  <span>{{ ruta.observacionesCargador }}</span>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </md-content>
         <md-card>
           <md-card-header>
-            <div class="md-title">Datos del cargador contractual</div>
-            <span
-              >(cargador efectivo u otro operador que contrate el transporte o
-              intermidie en su contratación)</span
-            >
+            <div class="md-title">Datos del transportista efectivo</div>
+            <span>(titular de la autorización de transporte)</span>
           </md-card-header>
-
           <md-card-content>
             <div class="wrapper">
               <div>
-                <label for="nombrecliente">Nombre o denominación social</label>
+                <label for="nombretransportista"
+                  >Nombre o denominación social</label
+                >
               </div>
               <div class="dato">
-                <span class="" id="nombrecliente">{{
-                  ruta.cliente.nombre
+                <span id="nombretransportista">{{
+                  ruta.transportista.nombre
                 }}</span>
               </div>
             </div>
-
             <div class="wrapper">
-              <div class="col-sm-4">
-                <label for="nifcliente">NIF</label>
+              <div>
+                <label for="niftransportista">NIF</label>
               </div>
-              <div class="col-sm-4 dato">
-                <span>{{ ruta.cliente.nif }}</span>
+              <div class="dato">
+                <span>{{ ruta.transportista.nif }}</span>
               </div>
               <div>
-                <label for="provinciacliente">Provincia</label>
+                <label for="provinciatransportista">Provincia</label>
               </div>
               <div class="dato">
                 <span>{{
-                  this.provinciaString(ruta.cliente.codProvincia)
+                  this.provinciaString(ruta.transportista.codProvincia)
                 }}</span>
               </div>
             </div>
-
             <div class="wrapper">
               <div>
-                <label for="codpostalcliente">Código postal</label>
+                <label for="codpostaltransportista">Código postal</label>
               </div>
               <div class="dato">
-                <span>{{ ruta.cliente.codPostal }}</span>
+                <span>{{ ruta.transportista.codPostal }}</span>
               </div>
               <div>
-                <label for="localidadcliente">Poblacion</label>
+                <label for="localidadtransportista">Poblacion</label>
               </div>
               <div class="dato">
-                <span>{{ ruta.cliente.localidad }}</span>
+                <span>{{ ruta.transportista.localidad }}</span>
               </div>
             </div>
-
             <div class="wrapper">
               <div>
-                <label for="observacionescliente"
-                  >Observaciones del cargador</label
+                <label for="observacionestransportista"
+                  >Observaciones del transportista</label
                 >
               </div>
             </div>
-
             <div class="wrapper">
               <div class="dato" style="height: 100px">
-                <span>{{ ruta.observacionesCargador }}</span>
+                <span>{{ ruta.observacionesTransportista }}</span>
               </div>
             </div>
           </md-card-content>
         </md-card>
-      </md-content>
-
-      <md-card>
-        <md-card-header>
-          <div class="md-title">Datos del transportista efectivo</div>
-          <span>(titular de la autorización de transporte)</span>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="wrapper">
-            <div>
-              <label for="nombretransportista"
-                >Nombre o denominación social</label
-              >
-            </div>
-            <div class="dato">
-              <span id="nombretransportista">{{
-                ruta.transportista.nombre
-              }}</span>
-            </div>
-          </div>
-          <div class="wrapper">
-            <div>
-              <label for="niftransportista">NIF</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.transportista.nif }}</span>
-            </div>
-            <div>
-              <label for="provinciatransportista">Provincia</label>
-            </div>
-            <div class="dato">
-              <span>{{
-                this.provinciaString(ruta.transportista.codProvincia)
-              }}</span>
-            </div>
-          </div>
-          <div class="wrapper">
-            <div>
-              <label for="codpostaltransportista">Código postal</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.transportista.codPostal }}</span>
-            </div>
-            <div>
-              <label for="localidadtransportista">Poblacion</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.transportista.localidad }}</span>
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="observacionestransportista"
-                >Observaciones del transportista</label
-              >
-            </div>
-          </div>
-          <div class="wrapper">
-            <div class="dato" style="height: 100px">
-              <span>{{ ruta.observacionesTransportista }}</span>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-header>
-          <div class="md-title">Datos del transporte</div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="wrapper">
-            <div>
-              <label for="origen">Origen</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.origen }}</span>
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="destino">Destino</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.destino }}</span>
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="fecha">Fecha de envío</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.fechaEnvio | formatDate }}</span>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-header>
-          <div class="md-title">Datos de la mercancía</div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="wrapper">
-            <div>
-              <label for="naturaleza">Naturaleza</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.mercancia.nombre }}</span>
-            </div>
-          </div>
-
-          <div v-if="ruta.peso" class="wrapper">
-            <div>
-              <label for="perso">Peso (kg.)</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.peso | formatNumber }}</span>
-            </div>
-            <div>
-              <label for="numBultos">Número de bultos</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.numeroBultos }}</span>
-            </div>
-          </div>
-
-          <div v-if="ruta.litros" class="wrapper">
-            <div>
-              <label for="litros">Litros</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.litros }}</span>
-            </div>
-
-            <div>
-              <label for="temperatura">Temperatura</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.temperatura }}</span>
-            </div>
-          </div>
-          <div class="wrapper">
-            <div>
-              <md-checkbox v-model="ruta.muestra" class="md-primary">
-                <strong>Muestra</strong>
-              </md-checkbox>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-header>
-          <div class="md-title">
-            Matrículas de los vehículos que intervienen en el transporte
-          </div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="wrapper">
-            <div>
-              <label for="tractor">Vehículo tractor</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.vehiculo.matricula }}</span>
-            </div>
-            <div>
-              <label for="remolque">Remolque o semiremolque</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.remolque.matricula }}</span>
-            </div>
-          </div>
-          <strong> Otros vehículos que intervienen en el transporte </strong>
-
-          <div class="wrapper">
-            <div>
-              <label for="otro1">Vehículo tractor</label>
-            </div>
-            <div class="dato"></div>
-            <div>
-              <label for="otro1">Remolque o semiremolque</label>
-            </div>
-            <div class="dato"></div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="otro1">Vehículo tractor</label>
-            </div>
-            <div class="dato"></div>
-            <div>
-              <label for="otro1">Remolque o semiremolque</label>
-            </div>
-            <div class="dato"></div>
-          </div>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-header>
-          <strong> Otra información no obligatoria </strong>
-          <div class="md-title">Destinatario</div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="wrapper">
-            <div>
-              <label for="nombredestinatario"
-                >Nombre o denominación social</label
-              >
-            </div>
-            <div class="dato">
-              <span id="nombredestinatario">{{
-                ruta.destinatario.nombre
-              }}</span>
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="nifdestinatario">NIF</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.destinatario.nif }}</span>
-            </div>
-            <div>
-              <label for="provinciadestinatario">Provincia</label>
-            </div>
-            <div class="dato">
-              <span>{{
-                this.provinciaString(ruta.destinatario.codProvincia)
-              }}</span>
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div>
-              <label for="localidaddestinatario">Poblacion</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.destinatario.localidad }}</span>
-            </div>
-            <div>
-              <label for="codpostaldestinatario">Código postal</label>
-            </div>
-            <div class="dato">
-              <span>{{ ruta.destinatario.codPostal }}</span>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-content>
-          <div class="wrapper">
-            <div style="background-color: white">
-              <p>Firma del cargador</p>
-              <!-- <img src="../assets/images/Firma.png" alt="Firma del cargador"> -->
-
+        <md-card>
+          <md-card-header>
+            <div class="md-title">Datos del transporte</div>
+          </md-card-header>
+          <md-card-content>
+            <div class="wrapper">
               <div>
-                <div
-                  class="col-md-12"
-                  v-if="ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''"
+                <label for="origen">Origen</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.origen }}</span>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <label for="destino">Destino</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.destino }}</span>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <label for="fecha">Fecha de envío</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.fechaEnvio | formatDate }}</span>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+        <md-card>
+          <md-card-header>
+            <div class="md-title">Datos de la mercancía</div>
+          </md-card-header>
+          <md-card-content>
+            <div class="wrapper">
+              <div>
+                <label for="naturaleza">Naturaleza</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.mercancia.nombre }}</span>
+              </div>
+            </div>
+            <div v-if="ruta.peso" class="wrapper">
+              <div>
+                <label for="perso">Peso (kg.)</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.peso | formatNumber }}</span>
+              </div>
+              <div>
+                <label for="numBultos">Número de bultos</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.numeroBultos }}</span>
+              </div>
+            </div>
+            <div v-if="ruta.litros" class="wrapper">
+              <div>
+                <label for="litros">Litros</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.litros }}</span>
+              </div>
+              <div>
+                <label for="temperatura">Temperatura</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.temperatura }}</span>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <md-checkbox v-model="ruta.muestra" class="md-primary">
+                  <strong>Muestra</strong>
+                </md-checkbox>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+        <md-card>
+          <md-card-header>
+            <div class="md-title">
+              Matrículas de los vehículos que intervienen en el transporte
+            </div>
+          </md-card-header>
+          <md-card-content>
+            <div class="wrapper">
+              <div>
+                <label for="tractor">Vehículo tractor</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.vehiculo.matricula }}</span>
+              </div>
+              <div>
+                <label for="remolque">Remolque o semiremolque</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.remolque.matricula }}</span>
+              </div>
+            </div>
+            <strong> Otros vehículos que intervienen en el transporte </strong>
+            <div class="wrapper">
+              <div>
+                <label for="otro1">Vehículo tractor</label>
+              </div>
+              <div class="dato"></div>
+              <div>
+                <label for="otro1">Remolque o semiremolque</label>
+              </div>
+              <div class="dato"></div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <label for="otro1">Vehículo tractor</label>
+              </div>
+              <div class="dato"></div>
+              <div>
+                <label for="otro1">Remolque o semiremolque</label>
+              </div>
+              <div class="dato"></div>
+            </div>
+          </md-card-content>
+        </md-card>
+        <md-card>
+          <md-card-header>
+            <strong> Otra información no obligatoria </strong>
+            <div class="md-title">Destinatario</div>
+          </md-card-header>
+          <md-card-content>
+            <div class="wrapper">
+              <div>
+                <label for="nombredestinatario"
+                  >Nombre o denominación social</label
                 >
-                  <VueSignaturePad
-                    id="signature"
-                    width="300px"
-                    height="200px"
-                    ref="signaturePad"
-                    :options="this.signatureOptions"
-                  />
-                </div>
-                <div v-if="ruta.firmaDataUrl !== null && ruta.firmaDataUrl !== ''">
-                  <img :src="ruta.firmaDataUrl" alt="Firma" width="300px" height="200px" />
-                </div>
-                <div
-                  class="row"
-                  v-if="ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''"
-                >
-                  <div class="col-md-6">
-                    <button class="btn btn-outline-primary" @click="saveSign">
-                      Firmar
-                    </button>
+              </div>
+              <div class="dato">
+                <span id="nombredestinatario">{{
+                  ruta.destinatario.nombre
+                }}</span>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <label for="nifdestinatario">NIF</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.destinatario.nif }}</span>
+              </div>
+              <div>
+                <label for="provinciadestinatario">Provincia</label>
+              </div>
+              <div class="dato">
+                <span>{{
+                  this.provinciaString(ruta.destinatario.codProvincia)
+                }}</span>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div>
+                <label for="localidaddestinatario">Poblacion</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.destinatario.localidad }}</span>
+              </div>
+              <div>
+                <label for="codpostaldestinatario">Código postal</label>
+              </div>
+              <div class="dato">
+                <span>{{ ruta.destinatario.codPostal }}</span>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+        <md-card>
+          <md-card-content>
+            <div ref="firmas" class="wrapper">
+              <div ref="firma_cargador" style="background-color: white">
+                <p>Firma del cargador</p>
+                <!-- <img src="../assets/images/Firma.png" alt="Firma del cargador"> -->
+                <div>
+                  <div
+                    class="col-md-12"
+                    v-if="
+                      ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''
+                    "
+                  >
+                    <VueSignaturePad
+                      id="signature"
+                      width="300px"
+                      height="200px"
+                      ref="signaturePad"
+                      :options="this.signatureOptions"
+                    />
                   </div>
-                  <div class="col-md-6">
-                    <button class="btn btn-outline-primary" @click="clearSign">
-                      Borrar
-                    </button>
+                  <div
+                    v-if="
+                      ruta.firmaDataUrl !== null && ruta.firmaDataUrl !== ''
+                    "
+                  >
+                    <img
+                      :src="ruta.firmaDataUrl"
+                      alt="Firma"
+                      width="300px"
+                      height="200px"
+                    />
+                  </div>
+                  <div
+                    class="row"
+                    v-if="
+                      ruta.firmaDataUrl === null || ruta.firmaDataUrl === ''
+                    "
+                  >
+                    <div class="col-md-6">
+                      <button class="btn btn-outline-primary" @click="saveSign">
+                        Firmar
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button
+                        class="btn btn-outline-primary"
+                        @click="clearSign"
+                      >
+                        Borrar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              <div ref="firma_transportista" style="background-color: white">
+                <p>Firma del transportista</p>
+                <img
+                  src="../assets/images/sello-500x300.png"
+                  alt="Firma del transportista"
+                  sizes="(max-width: 165px) 150px,
+                           (max-width: 330px) 300px,
+                           500px"
+                  srcset="
+                    ../assets/images/sello-165x99.png  165w,
+                    ../assets/images/sello-330x198.png,
+                    330w,
+                    ../assets/images/sello-500x300.png 500w
+                  "
+                />
+              </div>
             </div>
-            <div style="background-color: white">
-              <p>Firma del transportista</p>
-              <img
-                src="../assets/images/sello-500x300.png"
-                alt="Firma del transportista"
-                sizes="(max-width: 165px) 150px,
-                         (max-width: 330px) 300px,
-                         500px"
-                srcset="
-                  ../assets/images/sello-165x99.png  165w,
-                  ../assets/images/sello-330x198.png,
-                  330w,
-                  ../assets/images/sello-500x300.png 500w
-                "
-              />
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+
+    <div
+      class="ros"
+      v-if="ruta.firmaDataUrl !== null && ruta.firmaDataUrl !== ''"
+    >
+      <div class="col-md-12">
+        <button @click="downloadPdfWithCSS">Descargar PDF</button>
+      </div>
     </div>
   </div>
 </template>
@@ -415,6 +418,8 @@
 import babelPolyfill from "babel-polyfill";
 import { rutasService } from "../services/rutas.service";
 import provinciasFile from "../assets/provincias.json";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default {
   data() {
@@ -471,6 +476,30 @@ export default {
     },
   },
   methods: {
+    downloadPdf() {
+      const doc = new jsPDF();
+      const contentHtml = this.$refs.pdfcontent.innerHTML;
+      doc.html(contentHtml, {
+        width: 170,
+      });
+      doc.save("ruta.pdf");
+    },
+    downloadPdfWithCSS() {
+      const doc = new jsPDF('p', 'pt', 'a4');
+      /** WITH CSS */
+      var canvasElement = document.createElement("canvas");      
+      const el = this.$refs.pdfcontent
+      const area = el.getBoundingClientRect()
+      console.log('pdfcontent', el)
+      html2canvas(el, { scrollX: 0, scrollY: -window.scrollY, width: area.width, height: area.height}).then(function (
+        canvas
+      ) {
+        const img = canvas.toDataURL("image/jpeg", 0.8);
+        console.log('img', img)
+        doc.addImage(img, "JPEG", 20, 20);
+        doc.save("ruta.pdf");
+      });
+    },
     saveSign() {
       const vm = this;
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
@@ -481,7 +510,6 @@ export default {
 
         this.saveRutaToLocalStorage();
       }
-
     },
     clearSign() {
       this.$refs.signaturePad.undoSignature();
@@ -490,7 +518,7 @@ export default {
     comingFromHome() {
       return this.from.toLowerCase() === "home";
     },
-    saveRutaToLocalStorage() {      
+    saveRutaToLocalStorage() {
       var rutasStr = localStorage.getItem("RutasHabiles");
       if (rutasStr !== undefined && rutasStr !== null) {
         var rutas = JSON.parse(rutasStr);
@@ -512,7 +540,7 @@ export default {
         var ruta = rutas.find((ruta) => ruta.id === id * 1);
 
         if (ruta !== undefined) {
-          vm.ruta = ruta;          
+          vm.ruta = ruta;
         }
       }
 
@@ -529,7 +557,6 @@ export default {
           // this.$refs.signaturePad.fromDataURL(
           //   "data:image/png;base64," + b64Image
           // );
-          console.log("imagen cargada ...");
         }
       });
     },

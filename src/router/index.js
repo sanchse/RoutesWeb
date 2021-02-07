@@ -15,6 +15,7 @@ import Mercancias from '../components/mercancias.vue';
 import MercanciaPost from '../components/mercancia-post.vue';
 import Rutas from '../components/rutas.vue';
 import RutaDetalle from '../components/ruta-detalle.vue';
+import RutaDetallePdf from '../components/ruta-detalle-pdf.vue';
 import RutaPost from '../components/ruta-post2.vue';
 
 export const routes = [
@@ -36,6 +37,7 @@ export const routes = [
     { path: '/rutas', component: Rutas}, 
     { path: '/ruta-detalle/:id', component: RutaDetalle},
     { path: '/ruta-detalle/:id/from/:from', component: RutaDetalle},
+    { path: '/ruta-detalle-pdf/:id', component: RutaDetallePdf},
     { path: '/ruta-post/:id?', component: RutaPost },
     // { path: '*', redirect: '/'},
 ]
