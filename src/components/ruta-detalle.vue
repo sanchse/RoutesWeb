@@ -407,9 +407,11 @@
       class="ros"
       v-if="ruta.firmaDataUrl !== null && ruta.firmaDataUrl !== ''"
     >
+    <br>
       <div class="col-md-12">
-        <button @click="downloadPdfWithCSS">Descargar PDF</button>
+        <button @click="downloadPdf" class="btn btn-outline-primary">Descargar PDF</button>
       </div>
+      <br>
     </div>
   </div>
 </template>
@@ -420,6 +422,7 @@ import { rutasService } from "../services/rutas.service";
 import provinciasFile from "../assets/provincias.json";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import download from 'downloadjs';
 
 export default {
   data() {
@@ -477,6 +480,21 @@ export default {
   },
   methods: {
     downloadPdf() {
+      rutasService.downloadRuta(this.rutaId)
+        .then(response => {
+          const content = response.headers['content-type'];
+          
+          //Download to file
+          //download(response.data, `ruta_${this.rutaId}.pdf`, content);
+          
+          //Download to new tab
+          var file = new File([response.data], `ruta_${this.rutaId}.pdf`, { type: 'application/pdf' });
+          var fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+        })
+        .catch(error => console.log(error));
+    },
+    downloadPdf2() {
       const doc = new jsPDF();
       const contentHtml = this.$refs.pdfcontent.innerHTML;
       doc.html(contentHtml, {

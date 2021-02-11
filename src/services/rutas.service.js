@@ -73,6 +73,10 @@ export default class RutasService extends BaseHttpService {
   signRuta(id, firma) {
     return this.patch(`rutas/${id}`, { firma });
   }
+
+  downloadRuta(id) {
+    return this.get(`rutas/download/${id}`, { responseType: 'blob' });    
+  }
 }
 
 export const rutasService = new RutasService();
