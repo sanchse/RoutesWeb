@@ -281,6 +281,7 @@ import { vehiculosService } from "../services/vehiculos.service";
 import { remolquesService } from "../services/remolques.service";
 import { mercanciasService } from "../services/mercancias.service";
 import { rutasService } from "../services/rutas.service";
+import { uuid } from 'vue-uuid'
 
 export default {
   data() {
@@ -574,49 +575,29 @@ export default {
         } = this.model;
 
         let ruta = null;
-
-        if (this.editMode) {
-          ruta = await rutasService.updateRuta(
-            this.rutaId,
-            new Date(fechaEnvio),
-            origen,
-            destino,
-            peso,
-            litros,
-            muestra,
-            temperatura,
-            numeroBultos == null ? numeroBultos : numeroBultos.toString(),
-            conductorId,
-            clienteId,
-            transportistaId,
-            destinatarioId,
-            vehiculoId,
-            remolqueId,
-            mercanciaId,
-            observacionesCargador,
-            observacionesTransportista
-          );
-        } else {
-          ruta = await rutasService.createRuta(
-            new Date(fechaEnvio),
-            origen,
-            destino,
-            peso,
-            litros,
-            muestra,
-            temperatura,
-            numeroBultos == null ? numeroBultos : numeroBultos.toString(),
-            conductorId,
-            clienteId,
-            transportistaId,
-            destinatarioId,
-            vehiculoId,
-            remolqueId,
-            mercanciaId,
-            observacionesCargador,
-            observacionesTransportista
-          );
-        }
+        const idRuta = this.editMode ? this.rutaId : uuid.v4();
+        
+        ruta = await rutasService.putRuta(
+          idRuta,
+          new Date(fechaEnvio),
+          origen,
+          destino,
+          peso,
+          litros,
+          muestra,
+          temperatura,
+          numeroBultos == null ? numeroBultos : numeroBultos.toString(),
+          conductorId,
+          clienteId,
+          transportistaId,
+          destinatarioId,
+          vehiculoId,
+          remolqueId,
+          mercanciaId,
+          observacionesCargador,
+          observacionesTransportista
+        );
+        
         this.isSaving = false;
 
         console.info("Datos ruta: ", ruta);
@@ -638,7 +619,7 @@ export default {
       }
     },
     handleError(error) {
-      const { statusCode } = error.response.data;
+      const { statusCode } = error.response.data != undefined ? error.response.data : 500;
       console.info("status code: ", statusCode);
 
       if (statusCode !== 401) {
