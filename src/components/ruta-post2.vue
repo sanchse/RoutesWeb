@@ -1,9 +1,7 @@
 <template>
   <div class="container">
     <div class="d-flex justify-content-start mb-3">
-      <router-link to="/rutas" class="btn btn-sm btn-outline-secondary"
-        >Volver</router-link
-      >
+      <router-link to="/rutas" class="btn btn-sm btn-outline-secondary">Volver</router-link>
     </div>
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex flex-column align-items-start">
@@ -14,250 +12,134 @@
       </div>
     </div>
 
-    <div class="card pl-4 pt-5 pb-5 pr-4 mt-5">      
+    <div class="card pl-4 pt-5 pb-5 pr-4 mt-5">
       <legend>Datos de la ruta</legend>
 
       <b-form @submit="checkForm" :novalidate=true>
         <div class="row">
           <div class="col-6">
-            <b-form-group
-              id="input-group-1"
-              label="Origen"
-              label-for="input-origen"
-              class="required"
-            >
-              <b-form-input
-                id="input-origen"
-                v-model="model.origen"
-                required
-                placeholder="Origen del transporte"    
-                class="ancho_100_por_100"        
-              ></b-form-input>
+            <b-form-group id="input-group-1" label="Origen" label-for="input-origen" class="required">
+              <b-form-input id="input-origen" v-model="model.origen" required placeholder="Origen del transporte"
+                class="ancho_100_por_100"></b-form-input>
             </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Destino"
-          label-for="input-destino"
-          class="required"
-        >
-          <b-form-input
-            id="input-destino"
-            v-model="model.destino"
-            required
-            placeholder="Destino del transporte"
-          ></b-form-input>
-        </b-form-group>
+            <b-form-group id="input-group-2" label="Destino" label-for="input-destino" class="required">
+              <b-form-input id="input-destino" v-model="model.destino" required
+                placeholder="Destino del transporte"></b-form-input>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-fechaEnvio"
-          label="Fecha de envío"
-          label-for="input-fechaEnvio"
-          class="required"
-        >
-          <b-form-datepicker
-            id="input-fechaEnvio"
-            v-model="model.fechaEnvio"
-            v-bind="datepickerFormat.labels[datepickerFormat.locale] || {}"
-            :state="isValidSendDate"
-            :date-format-options="{
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            }"
-            :start-weekday="datepickerFormat.weekday"
-            locale="es"
-            required
-            placeholder="Fecha del transporte"
-          ></b-form-datepicker>
-        </b-form-group>
+            <b-form-group id="input-group-fechaEnvio" label="Fecha de envío" label-for="input-fechaEnvio"
+              class="required">
+              <b-form-datepicker id="input-fechaEnvio" v-model="model.fechaEnvio"
+                v-bind="datepickerFormat.labels[datepickerFormat.locale] || {}" :state="isValidSendDate"
+                :date-format-options="{
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                }" :start-weekday="datepickerFormat.weekday" locale="es" required
+                placeholder="Fecha del transporte"></b-form-datepicker>
+            </b-form-group>
 
-        <b-form-group 
-          id="input-group-3" 
-          label="Peso" 
-          label-for="input-peso"
-        >
-          <b-form-input
-            id="input-peso"
-            type="number"
-            min="0"
-            max="35000"
-            v-model="model.peso"
-            placeholder="Peso de la mercancia"
-          ></b-form-input>
-        </b-form-group>
 
-        <b-form-group id="input-group-6" label="Número de bultos" label-for="input-numero-bultos">
-          <b-form-input
-            id="input-numero-bultos"
-            type="number"
-            min="0"
-            max="9999"
-            v-model="model.numeroBultos"
-            placeholder="Número de bultos"
-          ></b-form-input>
-        </b-form-group>
+            <b-form-group id="input-group-albaran" label="Albarán" label-for="input-albaran">
+              <b-form-input id="input-albaran" v-model="model.albaran" placeholder="Número de albarán"></b-form-input>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-4"
-          label="Litros"
-          label-for="input-litros"
-        >
-          <b-form-input
-            id="input-litros"
-            type="number"
-            min="0"
-            max="35000"
-            v-model="model.litros"
-            placeholder="Litros de la mercancia"
-          ></b-form-input>
-        </b-form-group>
 
-        <b-form-group
-          id="input-group-5"
-          label="Temperatura"
-          label-for="input-temperatura"
-        >
-          <b-form-input
-            id="input-temperatura"
-            type="number"
-            min="0"
-            max="99"
-            v-model="model.temperatura"
-            placeholder="Temperatura de la mercancia"
-          ></b-form-input>
-        </b-form-group>        
 
-        <b-form-group
-          id="input-group-7"
-          label="Muestra"
-          label-for="input-muestra"
-        >
-          <b-form-checkbox
-            id="input-muestra"
-            v-model="model.muestra"
-          ></b-form-checkbox>
-        </b-form-group>
+            <b-form-group id="input-group-3" label="Peso" label-for="input-peso">
+              <b-form-input id="input-peso" type="number" min="0" max="35000" v-model="model.peso"
+                placeholder="Peso de la mercancia"></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-6" label="Número de bultos" label-for="input-numero-bultos">
+              <b-form-input id="input-numero-bultos" type="number" min="0" max="9999" v-model="model.numeroBultos"
+                placeholder="Número de bultos"></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-4" label="Litros" label-for="input-litros">
+              <b-form-input id="input-litros" type="number" min="0" max="35000" v-model="model.litros"
+                placeholder="Litros de la mercancia"></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-5" label="Temperatura" label-for="input-temperatura">
+              <b-form-input id="input-temperatura" type="number" min="0" max="99" v-model="model.temperatura"
+                placeholder="Temperatura de la mercancia"></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-7" label="Muestra" label-for="input-muestra">
+              <b-form-checkbox id="input-muestra" v-model="model.muestra"></b-form-checkbox>
+            </b-form-group>
 
           </div>
           <div class="col-6">
-            
-        <b-form-group v-show="!conductorIdParam"
-          id="input-group-conductor"
-          label="Conductor"
-          label-for="input-conductor"  
-          class="required"        
-        >
-          <b-form-select v-model="model.conductorId" :options="conductores" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
 
-        <b-form-group
-          id="input-group-cliente"
-          label="Cliente"
-          label-for="input-cliente"  
-          class="required"        
-        >
-          <b-form-select v-model="model.clienteId" :options="clientes" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
+            <b-form-group v-show="!conductorIdParam" id="input-group-conductor" label="Conductor"
+              label-for="input-conductor" class="required">
+              <b-form-select v-model="model.conductorId" :options="conductores" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
 
-        <b-form-group
-            id="input-group-observaciones-cliente"
-            label="Observaciones del cargador"
-            label-for="observaciones-cargador"
-            class=""
-        >
-          <b-form-textarea
-            id="observaciones-cargador"
-            v-model="model.observacionesCargador"
-            placeholeder="Observaciones..."
-            rows="3"
-            no-resize
-          >
-          </b-form-textarea>
-        </b-form-group>
+            <b-form-group id="input-group-cliente" label="Cliente" label-for="input-cliente" class="required">
+              <b-form-select v-model="model.clienteId" :options="clientes" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
 
-        
-        <b-form-group
-          id="input-group-destinatario"
-          label="Destinatario"
-          label-for="input-destinatario"
-          class="required"
-        >
-          <b-form-select v-model="model.destinatarioId" :options="destinatarios">
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
+            <b-form-group id="input-group-observaciones-cliente" label="Observaciones del cargador"
+              label-for="observaciones-cargador" class="">
+              <b-form-textarea id="observaciones-cargador" v-model="model.observacionesCargador"
+                placeholeder="Observaciones..." rows="3" no-resize>
+              </b-form-textarea>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-transportista"
-          label="Transportista"
-          label-for="input-transportista"   
-          class="required"       
-        >
-          <b-form-select v-model="model.transportistaId" :options="transportistas" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
 
-        <b-form-group
-            id="input-group-observaciones-transportista"
-            label="Observaciones del transportista"
-            label-for="observaciones-transportista"
-            class=""
-        >
-          <b-form-textarea
-            id="observaciones-transportista"
-            v-model="model.observacionesTransportista"
-            placeholeder="Observaciones..."
-            rows="3"
-            no-resize
-          >
-          </b-form-textarea>
-        </b-form-group>
+            <b-form-group id="input-group-destinatario" label="Destinatario" label-for="input-destinatario"
+              class="required">
+              <b-form-select v-model="model.destinatarioId" :options="destinatarios">
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-vehiculo"
-          label="Vehículo"
-          label-for="input-vehiculo"
-          class="required"
-        >
-          <b-form-select v-model="model.vehiculoId" :options="vehiculos" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
+            <b-form-group id="input-group-transportista" label="Transportista" label-for="input-transportista"
+              class="required">
+              <b-form-select v-model="model.transportistaId" :options="transportistas" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-remolque"
-          label="Remolque"
-          label-for="input-remolque"  
-          class="required"        
-        >
-          <b-form-select v-model="model.remolqueId" :options="remolques" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
+            <b-form-group id="input-group-observaciones-transportista" label="Observaciones del transportista"
+              label-for="observaciones-transportista" class="">
+              <b-form-textarea id="observaciones-transportista" v-model="model.observacionesTransportista"
+                placeholeder="Observaciones..." rows="3" no-resize>
+              </b-form-textarea>
+            </b-form-group>
 
-        <b-form-group
-          id="input-group-mercancia"
-          label="Mercancia"
-          label-for="input-mercancia"
-          class="required"
-        >
-          <b-form-select v-model="model.mercanciaId" :options="mercancias" required>
-            <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
-          </b-form-select>
-        </b-form-group>
+            <b-form-group id="input-group-vehiculo" label="Vehículo" label-for="input-vehiculo" class="required">
+              <b-form-select v-model="model.vehiculoId" :options="vehiculos" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
 
-        <p v-if="errors.length">
-          <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
-          <ul>
-            <li v-for="error in errors" :key=error>{{ error }}</li>
-          </ul>
-        </p>
+            <b-form-group id="input-group-remolque" label="Remolque" label-for="input-remolque" class="required">
+              <b-form-select v-model="model.remolqueId" :options="remolques" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
+
+            <b-form-group id="input-group-mercancia" label="Mercancia" label-for="input-mercancia" class="required">
+              <b-form-select v-model="model.mercanciaId" :options="mercancias" required>
+                <b-form-select-option value="" disabled>-- Seleccione una opción --</b-form-select-option>
+              </b-form-select>
+            </b-form-group>
+
+            <p v-if="errors.length">
+              <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+            <ul>
+              <li v-for="error in errors" :key=error>{{ error }}</li>
+            </ul>
+            </p>
           </div>
         </div>
 
@@ -332,8 +214,9 @@ export default {
         remolqueId: "",
         mercanciaId: "",
         finalizado: 0,
+        albaran: "",
         //fechaEnvio: new Date().valueOf(),
-      },      
+      },
       isSaving: false,
       error: false,
       rutaId: null,
@@ -346,7 +229,7 @@ export default {
       this.loadModel();
     },
   },
-  created() {},
+  created() { },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       conductoresService
@@ -539,6 +422,7 @@ export default {
         mercanciaId,
         finalizado,
         firmaDataUrl,
+        albaran,
       } = ruta.data;
 
       this.model = ruta.data;
@@ -572,11 +456,12 @@ export default {
           observacionesCargador = "",
           observacionesTransportista = "",
           finalizado = 0,
+          albaran = "",
         } = this.model;
 
         let ruta = null;
         const idRuta = this.editMode ? this.rutaId : uuid.v4();
-        
+
         ruta = await rutasService.putRuta(
           idRuta,
           new Date(fechaEnvio),
@@ -595,9 +480,10 @@ export default {
           remolqueId,
           mercanciaId,
           observacionesCargador,
-          observacionesTransportista
+          observacionesTransportista,
+          albaran,
         );
-        
+
         this.isSaving = false;
 
         console.info("Datos ruta: ", ruta);
@@ -627,7 +513,7 @@ export default {
       } else {
         console.error("error 401");
         this.$emit("renove-token");
-        this.$router.push("/").catch((err) => {});
+        this.$router.push("/").catch((err) => { });
       }
     },
   },
@@ -652,17 +538,20 @@ input,
 textarea,
 select,
 button {
-  width: 200px;
+  width: 300px;
   margin: 0;
 
-  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-  -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+  -webkit-box-sizing: border-box;
+  /* For legacy WebKit based browsers */
+  -moz-box-sizing: border-box;
+  /* For legacy (Firefox <29) Gecko based browsers */
   box-sizing: border-box;
 }
 
 .btn-primary {
   color: #407ad9;
 }
+
 .btn-primary:hover {
   color: white;
 }

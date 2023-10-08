@@ -8,18 +8,12 @@
       <router-link to="/ruta-post" class="btn btn-primary">Crear</router-link>
     </div>
     <div class="float-left">
-        <label for="rutasDisponibles">Filtrar Finalizadas</label>
-        <input type="checkbox" name="rutasDisponibles" id="rutasDisponible" v-model="filtrarRutas" @change="search">
+      <label for="rutasDisponibles">Filtrar Finalizadas</label>
+      <input type="checkbox" name="rutasDisponibles" id="rutasDisponible" v-model="filtrarRutas" @change="search">
     </div>
     <div class="float-right">
       <label for="buscarRuta">Buscar</label>
-      <input
-        type="search"
-        name="buscarRuta"
-        id="buscarRuta"
-        v-model="buscar"
-        @keyup.enter.prevent="search"
-      />
+      <input type="search" name="buscarRuta" id="buscarRuta" v-model="buscar" @keyup.enter.prevent="search" />
     </div>
     <div class="table-responsive-md mt-5 bg-white">
       <div class="text-center" v-if="error">Error de conexión</div>
@@ -42,15 +36,10 @@
             <td>{{ ruta.destino }}</td>
             <td>{{ ruta.mercancia.nombre }}</td>
             <td>{{ ruta.vehiculo.nombre }}</td>
-            
+
             <td :id="'btn_' + ruta.id">
               <div class="button-group" style="display: inline-block">
-                <a
-                  href="#"
-                  @click="confirmFinishRoute(ruta.id)"
-                  class=""
-                  title="Finalizar"
-                >
+                <a href="#" @click="confirmFinishRoute(ruta.id)" class="" title="Finalizar">
                   <md-icon>done</md-icon>
                 </a>
 
@@ -58,24 +47,15 @@
                   <md-icon>visibility</md-icon>
                 </router-link>
 
-              <!-- class="btn btn-secondary a-btn-slide-text" -->
-                <router-link
-                  :to="`/ruta-post/${ruta.id}`"
-                  class=""
-                  title="Editar"
-                  >
-                    <md-icon>edit</md-icon>
-                  </router-link>
+                <!-- class="btn btn-secondary a-btn-slide-text" -->
+                <router-link :to="`/ruta-post/${ruta.id}`" class="" title="Editar">
+                  <md-icon>edit</md-icon>
+                </router-link>
 
                 <!-- class="btn btn-primary a-btn-slide-text" -->
-                <a
-                  href="#"
-                  @click="confirmDelete(ruta.id)"
-                  class=""
-                  title="Eliminar"
-                >
+                <a href="#" @click="confirmDelete(ruta.id)" class="" title="Eliminar">
                   <md-icon>delete</md-icon>
-                </a>                
+                </a>
               </div>
             </td>
           </tr>
@@ -92,12 +72,8 @@
         <hr />
       </div>
       <div class="float-right">
-        <b-button size="sm" variant="danger" @click="cancelDelete"
-          >Cancelar</b-button
-        >
-        <b-button size="sm" variant="success" @click="eliminarRuta"
-          >Confirmar</b-button
-        >
+        <b-button size="sm" variant="danger" @click="cancelDelete">Cancelar</b-button>
+        <b-button size="sm" variant="success" @click="eliminarRuta">Confirmar</b-button>
       </div>
     </b-modal>
 
@@ -107,12 +83,8 @@
         <hr />
       </div>
       <div class="float-right">
-        <b-button size="sm" variant="danger" @click="cancelFinish"
-          >Cancelar</b-button
-        >
-        <b-button size="sm" variant="success" @click="finishRuta"
-          >Confirmar</b-button
-        >
+        <b-button size="sm" variant="danger" @click="cancelFinish">Cancelar</b-button>
+        <b-button size="sm" variant="success" @click="finishRuta">Confirmar</b-button>
       </div>
     </b-modal>
   </div>
@@ -143,17 +115,17 @@ export default {
     };
   },
   computed: {
-    
+
   },
   methods: {
-      filtrar(rutas) {
-        const now = new Date();
-        return rutas.filter((ruta) => {
-            const date = new Date(ruta.fechaEnvio);
-            return date >= now;
-        });
-      },
-    
+    filtrar(rutas) {
+      const now = new Date();
+      return rutas.filter((ruta) => {
+        const date = new Date(ruta.fechaEnvio);
+        return date >= now;
+      });
+    },
+
     provinciaString(id) {
       const provincia = this.provincias.filter(function (data) {
         return data.id == id;
@@ -173,7 +145,7 @@ export default {
       this.$refs["finish-modal"].hide();
     },
     finishRuta() {
-      try {        
+      try {
         rutasService.finalizeRuta(this.selectedRutaId);
         this.$refs["finish-modal"].toggle(`#btn_${this.selectedRutaId}`);
         this.selectedRutaId = null;
@@ -198,7 +170,7 @@ export default {
       this.$refs["delete-modal"].hide();
     },
     eliminarRuta() {
-      try {        
+      try {
         rutasService.deleteRuta(this.selectedRutaId);
         this.$refs["delete-modal"].toggle(`#btn_${this.selectedRutaId}`);
         this.selectedRutaId = null;
@@ -216,7 +188,7 @@ export default {
     },
     async fetchRutas(searchText) {
       try {
-          this.cargando = true;
+        this.cargando = true;
         this.rutas = [];
         const datos = await rutasService.fetchRutas({
           fechaDesde: null,
@@ -249,7 +221,7 @@ export default {
       } else {
         console.error("error 401");
         this.$emit("renove-token");
-        this.$router.push("/").catch(err => {});
+        this.$router.push("/").catch(err => { });
       }
     },
   },

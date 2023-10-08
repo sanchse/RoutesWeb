@@ -58,8 +58,8 @@ export default class RutasService extends BaseHttpService {
     await this.delete(`rutas/${id}`);
   }
 
-  putRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
-    return this.put(`rutas`, { id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista });
+  putRuta(id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista, albaran) {
+    return this.put(`rutas`, { id, fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista, albaran });
   }
 
   // createRuta(fechaEnvio, origen, destino, peso, litros, muestra, temperatura, numeroBultos, conductorId, clienteId, transportistaId, destinatarioId, vehiculoId, remolqueId, mercanciaId, observacionesCargador, observacionesTransportista) {
